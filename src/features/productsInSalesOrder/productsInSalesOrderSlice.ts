@@ -22,6 +22,6 @@ export const productsInSalesOrderSlice = createSlice({
 export const { addProduct, removeProduct } = productsInSalesOrderSlice.actions;
 
 export const selectProductsInSalesOrder = (state: RootState) =>
-  state.productsInSalesOrder;
+  state.productosEnOrdenDeVenta;
 
 export default productsInSalesOrderSlice.reducer;

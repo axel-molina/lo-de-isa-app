@@ -9,18 +9,32 @@ import {
   ItemContainerStyled,
   ContainerGridStyled,
 } from '../styles/DataGridStyled';
+// Redux
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import {
+  addProduct,
+  removeProduct,
+} from '../../../features/productsInSalesOrder/productsInSalesOrderSlice';
 
-const DataGrid = (
-  { products }: IProducts[] | any,
-  action: string,
-  setListaOrdenDeVenta: (value: React.SetStateAction<IProducts[]>) => void
-) => {
-  const deleteItem = (id: number) => {
-    console.log('delete item', id);
+interface IProps {
+  action: 'delete' | 'add';
+}
+
+const DataGrid = ({action}: IProps) => {
+  const dispatch = useAppDispatch();
+
+  const productosEnOrdenDeVenta = useAppSelector(
+    (state) => state.productosEnOrdenDeVenta
+  );
+
+  const deleteItem = (item: IProducts) => {
+    // Eliminar de redux
+    dispatch(removeProduct(item));
   };
 
   const addItem = (item: IProducts) => {
-    setListaOrdenDeVenta([...products, item]);
+    // Añadir a redux
+    dispatch(addProduct(item));
   };
 
   return (
@@ -31,7 +45,7 @@ const DataGrid = (
         {action === 'delete' ? <div>Cantidad</div> : <div>Stock</div>}
         <div></div>
       </HeaderGridStyled>
-      {products.map((item: IProducts) => (
+      {productosEnOrdenDeVenta.map((item: IProducts) => (
         <ItemContainerStyled
           key={item.id}
           onClick={action === 'delete' ? undefined : () => addItem(item)}
@@ -52,7 +66,7 @@ const DataGrid = (
               <Button
                 variant="contained"
                 color="error"
-                onClick={() => deleteItem(item.id)}
+                onClick={() => deleteItem(item)}
               >
                 <Delete />
               </Button>

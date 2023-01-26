@@ -52,11 +52,7 @@ const Index = () => {
           Añadir
         </Button>
       </div>
-      <DataGrid
-        products={ListaOrdenDeVenta}
-        action={'delete'}
-        setListaOrdenDeVenta={setListaOrdenDeVenta}
-      />
+      <DataGrid action={'delete'} />
       <FooterTable precioFinal={precioFinal} />
       <ModalAñdirProd show={show} setShow={setShow} />
     </div>

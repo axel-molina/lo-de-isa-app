@@ -58,7 +58,7 @@ const ModalAñdirProd = ({ show, setShow }: IModal) => {
               </InputAdornment>
             }
           />
-          <DataGrid products={products} />
+          <DataGrid action="add" />
         </div>
       </Box>
     </Modal>
