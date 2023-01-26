@@ -13,8 +13,7 @@ import { addProduct } from '../../../features/productsInSalesOrder/productsInSal
 
 const DataGridModal = () => {
   const dispatch = useAppDispatch();
-
-  const products = useAppSelector((state) => state.productos);
+  const productsList = useAppSelector((state) => state.productos);
 
   const addItem = (item: IProducts) => {
     // Añadir a redux
@@ -29,7 +28,7 @@ const DataGridModal = () => {
         <div>Stock</div>
         <div></div>
       </HeaderGridStyled>
-      {products.map((item: IProducts) => (
+      {productsList.map((item: IProducts) => (
         <ItemContainerStyled key={item.id} onClick={() => addItem(item)}>
           <div>{item.nombre}</div>
           <div>${item.precio}</div>

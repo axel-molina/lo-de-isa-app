@@ -7,14 +7,18 @@ import {
 } from '../styles/FooterTableStyled';
 
 interface IPrice {
-  precioFinal: number | undefined;
+  precioFinal: number;
 }
 
 const FooterTable = ({ precioFinal }: IPrice) => {
+  // Mostart precio con dos decimales
+  const precioFinalConDosDecimales = precioFinal?.toFixed(2).replace('.', ',');
+
   return (
     <div>
       <PriceContainerStyled>
-        Precio total $ {precioFinal ? precioFinal : 0}
+        Precio total ${' '}
+        {precioFinalConDosDecimales ? precioFinalConDosDecimales : 0}
       </PriceContainerStyled>
       <ButtonsContainerStyled>
         <Button variant="contained" color="success">

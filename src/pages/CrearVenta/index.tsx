@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Components
 import DataGrid from './components/DataGrid';
 import Button from '@mui/material/Button';
@@ -6,24 +6,33 @@ import { Add } from '@mui/icons-material';
 import FooterTable from './components/FooterTable';
 // Interface
 import { IProducts } from '../../models/ProductsModel';
-import ModalAñdirProd from './components/ModalAñdirProd';
+import ModalAñadirProd from './components/ModalAñadirProd';
+// Redux
+import { useAppSelector } from '../../app/hooks';
 
 const Index = () => {
-  const [ListaOrdenDeVenta, setListaOrdenDeVenta] = useState<IProducts[]>([]);
-  const [precioFinal, setPrecioFinal] = useState<number>(0);
+  const ListaOrdenDeVenta = useAppSelector(
+    (state) => state.productosEnOrdenDeVenta
+  );
+
   const [show, setShow] = useState<boolean>(false);
 
-  // Calcular la suma de los precios de los productos si hay elementos en el array
-  const sumaDePrecios = ListaOrdenDeVenta.map((item) => {
-    if (item && item.precio) {
-      setPrecioFinal(precioFinal + item.precio * item.cantidad);
-    }
-  });
+  const sumaDePrecios = (): number => {
+    let suma = 0;
+    ListaOrdenDeVenta.forEach((item: IProducts) => {
+      suma += item.precio * item.cantidad;
+    });
+    return suma;
+  };
 
   // Mostrar el modal
   const showModal = () => {
     setShow(true);
   };
+
+  useEffect(() => {
+    sumaDePrecios();
+  }, [ListaOrdenDeVenta]);
 
   return (
     <div
@@ -52,9 +61,9 @@ const Index = () => {
           Añadir
         </Button>
       </div>
-      <DataGrid action={'delete'} />
-      <FooterTable precioFinal={precioFinal} />
-      <ModalAñdirProd show={show} setShow={setShow} />
+      <DataGrid />
+      <FooterTable precioFinal={sumaDePrecios()} />
+      <ModalAñadirProd show={show} setShow={setShow} />
     </div>
   );
 };

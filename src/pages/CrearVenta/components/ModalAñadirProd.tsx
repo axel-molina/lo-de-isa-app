@@ -1,15 +1,16 @@
 import React from 'react';
 import { Box, Modal, Input, Typography, InputAdornment } from '@mui/material';
 import { Close, Search } from '@mui/icons-material';
-import DataGrid from './DataGrid';
-import products from '../../../data/Products';
+// Componenets
+import DataGridModal from './DataGridModal';
 
 interface IModal {
   show: boolean;
   setShow: (show: boolean) => void;
 }
 
-const ModalAñdirProd = ({ show, setShow }: IModal) => {
+const ModalAñadirProd = ({ show, setShow }: IModal) => {
+
   const handleClose = () => {
     setShow(false);
   };
@@ -58,11 +59,11 @@ const ModalAñdirProd = ({ show, setShow }: IModal) => {
               </InputAdornment>
             }
           />
-          <DataGrid action="add" />
+          <DataGridModal />
         </div>
       </Box>
     </Modal>
   );
 };
 
-export default ModalAñdirProd;
+export default ModalAñadirProd;

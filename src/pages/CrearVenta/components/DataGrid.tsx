@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { Delete } from '@mui/icons-material';
+import { Delete, DeleteForever } from '@mui/icons-material';
 // Interface
 import { IProducts } from '../../../models/ProductsModel';
 // Styles
@@ -12,15 +12,11 @@ import {
 // Redux
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import {
-  addProduct,
-  removeProduct,
+  removeOneProduct,
+  removeAllItems,
 } from '../../../features/productsInSalesOrder/productsInSalesOrderSlice';
 
-interface IProps {
-  action: 'delete' | 'add';
-}
-
-const DataGrid = ({action}: IProps) => {
+const DataGrid = () => {
   const dispatch = useAppDispatch();
 
   const productosEnOrdenDeVenta = useAppSelector(
@@ -29,12 +25,12 @@ const DataGrid = ({action}: IProps) => {
 
   const deleteItem = (item: IProducts) => {
     // Eliminar de redux
-    dispatch(removeProduct(item));
+    dispatch(removeOneProduct(item));
   };
 
-  const addItem = (item: IProducts) => {
-    // Añadir a redux
-    dispatch(addProduct(item));
+  const deleteAllItems = (item: IProducts) => {
+    // Eliminar de redux
+    dispatch(removeAllItems(item));
   };
 
   return (
@@ -42,36 +38,33 @@ const DataGrid = ({action}: IProps) => {
       <HeaderGridStyled>
         <div>Producto</div>
         <div>Precio</div>
-        {action === 'delete' ? <div>Cantidad</div> : <div>Stock</div>}
-        <div></div>
+        <div>Cantidad</div>
+        <div>Eliminar</div>
+        <div>Eliminar todo</div>
       </HeaderGridStyled>
       {productosEnOrdenDeVenta.map((item: IProducts) => (
-        <ItemContainerStyled
-          key={item.id}
-          onClick={action === 'delete' ? undefined : () => addItem(item)}
-        >
+        <ItemContainerStyled key={item.id}>
           <div>{item.nombre}</div>
-          <div>${item.precio}</div>
-          <div
-            style={
-              action === 'delete'
-                ? { marginLeft: '22px' }
-                : { marginLeft: '10px' }
-            }
-          >
-            {action === 'delete' ? item.cantidad : item.stock}
+          <div>${item.precio.toFixed(2)}</div>
+          <div style={{ marginLeft: '22px' }}>{item.cantidad}</div>
+          <div>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => deleteItem(item)}
+            >
+              <Delete />
+            </Button>
           </div>
-          {action === 'delete' && (
-            <div>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => deleteItem(item)}
-              >
-                <Delete />
-              </Button>
-            </div>
-          )}
+          <div>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => deleteAllItems(item)}
+            >
+              <DeleteForever />
+            </Button>
+          </div>
         </ItemContainerStyled>
       ))}
     </ContainerGridStyled>
