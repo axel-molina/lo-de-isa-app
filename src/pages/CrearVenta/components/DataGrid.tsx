@@ -1,58 +1,53 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { AddCircle, Delete } from '@mui/icons-material';
+import { Delete } from '@mui/icons-material';
 // Interface
 import { IProducts } from '../../../models/ProductsModel';
+// Styles
+import {
+  HeaderGridStyled,
+  ItemContainerStyled,
+  ContainerGridStyled,
+} from '../styles/DataGridStyled';
 
-const DataGrid = ({ products }: IProducts[] | any, action: string) => {
+const DataGrid = (
+  { products }: IProducts[] | any,
+  action: string,
+  setListaOrdenDeVenta: (value: React.SetStateAction<IProducts[]>) => void
+) => {
   const deleteItem = (id: number) => {
     console.log('delete item', id);
   };
 
   const addItem = (item: IProducts) => {
-    console.log('Add item: ', item);
+    setListaOrdenDeVenta([...products, item]);
   };
 
   return (
-    <div
-      style={{
-        border: '1px solid #ECF0F1',
-        borderRadius: '5px',
-        height: '60vh',
-        overflow: 'scroll',
-      }}
-    >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '3fr 1fr 1fr 1fr',
-          alignItems: 'center',
-          padding: '10px',
-          borderTop: '1px solid #ECF0F1',
-          fontWeight: 'bold',
-          backgroundColor: '#ECF0F1',
-        }}
-      >
+    <ContainerGridStyled>
+      <HeaderGridStyled>
         <div>Producto</div>
         <div>Precio</div>
-        <div>Cantidad</div>
+        {action === 'delete' ? <div>Cantidad</div> : <div>Stock</div>}
         <div></div>
-      </div>
+      </HeaderGridStyled>
       {products.map((item: IProducts) => (
-        <div
+        <ItemContainerStyled
           key={item.id}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '3fr 1fr 1fr 1fr',
-            alignItems: 'center',
-            padding: '10px',
-            borderBottom: '1px solid #ECF0F1',
-          }}
+          onClick={action === 'delete' ? undefined : () => addItem(item)}
         >
           <div>{item.nombre}</div>
           <div>${item.precio}</div>
-          <div style={{ marginLeft: '22px' }}>{item.cantidad}</div>
-          {action === 'delete' ? (
+          <div
+            style={
+              action === 'delete'
+                ? { marginLeft: '22px' }
+                : { marginLeft: '10px' }
+            }
+          >
+            {action === 'delete' ? item.cantidad : item.stock}
+          </div>
+          {action === 'delete' && (
             <div>
               <Button
                 variant="contained"
@@ -62,20 +57,10 @@ const DataGrid = ({ products }: IProducts[] | any, action: string) => {
                 <Delete />
               </Button>
             </div>
-          ) : (
-            <div>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => addItem(item)}
-              >
-                <AddCircle />
-              </Button>
-            </div>
           )}
-        </div>
+        </ItemContainerStyled>
       ))}
-    </div>
+    </ContainerGridStyled>
   );
 };
 

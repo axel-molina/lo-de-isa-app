@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  Box,
-  Modal,
-  Input,
-  InputLabel,
-  Typography,
-  InputAdornment,
-} from '@mui/material';
+import { Box, Modal, Input, Typography, InputAdornment } from '@mui/material';
 import { Close, Search } from '@mui/icons-material';
+import DataGrid from './DataGrid';
+import products from '../../../data/Products';
 
 interface IModal {
   show: boolean;
@@ -63,6 +58,7 @@ const ModalAñdirProd = ({ show, setShow }: IModal) => {
               </InputAdornment>
             }
           />
+          <DataGrid products={products} />
         </div>
       </Box>
     </Modal>
