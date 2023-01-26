@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": ["./tsconfig.json"] },
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "eqeqeq": "warn",
+    "strict": "off",
+    "no-debugger":"off",
+    "no-console": ["warn"],
+    "no-else-return": "error",
+    "no-empty": "error",
+    "no-empty-function": "error",
+    "no-lone-blocks": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "@typescript-eslint/ban-types": "error",
+    "@typescript-eslint/method-signature-style": "warn",
+    "@typescript-eslint/no-empty-interface": "error",
+    "@typescript-eslint/no-require-imports": "warn",
+    "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/strict-boolean-expressions": 0,
+    "@typescript-eslint/no-non-null-assertion": "off"
+  },
+  "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"]
+}
