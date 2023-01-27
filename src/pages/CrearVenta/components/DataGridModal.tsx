@@ -3,9 +3,9 @@ import React from 'react';
 import { IProducts } from '../../../models/ProductsModel';
 // Styles
 import {
-  HeaderGridStyled,
-  ItemContainerStyled,
   ContainerGridStyled,
+  HeaderGridStyledModal,
+  ItemContainerStyledModal,
 } from '../styles/DataGridStyled';
 // Redux
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -22,18 +22,18 @@ const DataGridModal = () => {
 
   return (
     <ContainerGridStyled>
-      <HeaderGridStyled>
+      <HeaderGridStyledModal>
         <div>Producto</div>
         <div>Precio</div>
         <div>Stock</div>
         <div></div>
-      </HeaderGridStyled>
+      </HeaderGridStyledModal>
       {productsList.map((item: IProducts) => (
-        <ItemContainerStyled key={item.id} onClick={() => addItem(item)}>
+        <ItemContainerStyledModal key={item.id} onClick={() => addItem(item)}>
           <div>{item.nombre}</div>
-          <div>${item.precio}</div>
+          <div>${item.precio.toFixed(2)}</div>
           <div style={{ marginLeft: '10px' }}>{item.stock}</div>
-        </ItemContainerStyled>
+        </ItemContainerStyledModal>
       ))}
     </ContainerGridStyled>
   );
