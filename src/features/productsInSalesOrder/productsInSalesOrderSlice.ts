@@ -23,7 +23,6 @@ export const productsInSalesOrderSlice = createSlice({
       state.push(action.payload);
     },
     removeOneProduct: (state, action: PayloadAction<IProducts>) => {
-      // return state.filter((product) => product.id !== action.payload.id);
       // Si el producto ya existe en el carrito, se disminuye la cantidad
       const productIndex = state.findIndex(
         (product) => product.id === action.payload.id
@@ -39,10 +38,14 @@ export const productsInSalesOrderSlice = createSlice({
     removeAllItems: (state, action: PayloadAction<IProducts>) => {
       return state.filter((product) => product.id !== action.payload.id);
     },
+    clearCart: (state, action) => {
+      action.payload;
+      return state = [];
+    },
   },
 });
 
-export const { addProduct, removeOneProduct, removeAllItems } =
+export const { addProduct, removeOneProduct, removeAllItems, clearCart } =
   productsInSalesOrderSlice.actions;
 
 export const selectProductsInSalesOrder = (state: RootState) =>
