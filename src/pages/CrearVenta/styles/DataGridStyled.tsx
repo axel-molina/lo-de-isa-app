@@ -9,7 +9,7 @@ export const ContainerGridStyled = styled.div`
 
 export const HeaderGridStyled = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px;
   border-top: 1px solid #ecf0f1;
@@ -19,7 +19,7 @@ export const HeaderGridStyled = styled.div`
 
 export const HeaderGridStyledModal = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px;
   border-top: 1px solid #ecf0f1;
@@ -29,7 +29,7 @@ export const HeaderGridStyledModal = styled.div`
 
 export const ItemContainerStyled = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ecf0f1;
@@ -42,7 +42,7 @@ export const ItemContainerStyled = styled.div`
 
 export const ItemContainerStyledModal = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ecf0f1;

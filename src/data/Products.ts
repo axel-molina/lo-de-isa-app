@@ -7,6 +7,7 @@ const products: IProducts[] = [
     precio: 100,
     cantidad: 1,
     stock: 10,
+    codigo: '123456789',
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ const products: IProducts[] = [
     precio: 200,
     cantidad: 1,
     stock: 20,
+    codigo: '123456789',
   },
   {
     id: 3,
@@ -21,6 +23,7 @@ const products: IProducts[] = [
     precio: 300.50,
     cantidad: 1,
     stock: 30,
+    codigo: '123456789',
   },
   {
     id: 4,
@@ -28,6 +31,7 @@ const products: IProducts[] = [
     precio: 400,
     cantidad: 1,
     stock: 40,
+    codigo: '123456789',
   },
   {
     id: 5,
@@ -35,6 +39,7 @@ const products: IProducts[] = [
     precio: 500,
     cantidad: 1,
     stock: 50,
+    codigo: '123456789',
   },
   {
     id: 6,
@@ -42,6 +47,7 @@ const products: IProducts[] = [
     precio: 600,
     cantidad: 1,
     stock: 60,
+    codigo: '123456789',
   },
   {
     id: 7,
@@ -49,6 +55,7 @@ const products: IProducts[] = [
     precio: 700,
     cantidad: 1,
     stock: 70,
+    codigo: '123456789',
   },
   {
     id: 8,
@@ -56,6 +63,7 @@ const products: IProducts[] = [
     precio: 800,
     cantidad: 1,
     stock: 80,
+    codigo: '123456789',
   },
   {
     id: 9,
@@ -63,6 +71,7 @@ const products: IProducts[] = [
     precio: 900,
     cantidad: 1,
     stock: 90,
+    codigo: '123456789',
   },
   {
     id: 10,
@@ -70,6 +79,7 @@ const products: IProducts[] = [
     precio: 1000,
     cantidad: 1,
     stock: 100,
+    codigo: '123456789',
   },
 ];
 

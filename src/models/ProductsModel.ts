@@ -4,4 +4,5 @@ export interface IProducts {
     precio: number;
     cantidad: number;
     stock: number;
+    codigo: string;
 }

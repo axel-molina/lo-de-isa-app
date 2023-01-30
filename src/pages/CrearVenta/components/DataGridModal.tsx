@@ -24,6 +24,7 @@ const DataGridModal = () => {
     <ContainerGridStyled>
       <HeaderGridStyledModal>
         <div>Producto</div>
+        <div>Código</div>
         <div>Precio</div>
         <div>Stock</div>
         <div></div>
@@ -31,6 +32,7 @@ const DataGridModal = () => {
       {productsList.map((item: IProducts) => (
         <ItemContainerStyledModal key={item.id} onClick={() => addItem(item)}>
           <div>{item.nombre}</div>
+          <div>{item.codigo}</div>
           <div>${item.precio.toFixed(2)}</div>
           <div style={{ marginLeft: '10px' }}>{item.stock}</div>
         </ItemContainerStyledModal>

@@ -37,6 +37,7 @@ const DataGrid = () => {
     <ContainerGridStyled>
       <HeaderGridStyled>
         <div>Producto</div>
+        <div>Código</div>
         <div>Precio</div>
         <div>Cantidad</div>
         <div>Eliminar</div>
@@ -45,6 +46,7 @@ const DataGrid = () => {
       {productosEnOrdenDeVenta.map((item: IProducts) => (
         <ItemContainerStyled key={item.id}>
           <div>{item.nombre}</div>
+          <div>{item.codigo}</div>
           <div>${item.precio.toFixed(2)}</div>
           <div style={{ marginLeft: '22px' }}>{item.cantidad}</div>
           <div>
