@@ -6,9 +6,11 @@ import { Add } from '@mui/icons-material';
 import FooterTable from './components/FooterTable';
 // Interface
 import { IProducts } from '../../models/ProductsModel';
-import ModalAñadirProd from './components/ModalAñadirProd';
+import ModalAñadirProd from './components/ModalAddProd';
 // Redux
 import { useAppSelector } from '../../app/hooks';
+// Styles
+import { Container, ContainerButton } from './styles/Styles';
 
 const Index = () => {
   const ListaOrdenDeVenta = useAppSelector(
@@ -35,20 +37,8 @@ const Index = () => {
   }, [ListaOrdenDeVenta]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          margin: '10px',
-        }}
-      >
+    <Container>
+      <ContainerButton>
         <Button
           variant="contained"
           color="success"
@@ -60,11 +50,11 @@ const Index = () => {
           <Add />
           Añadir
         </Button>
-      </div>
+      </ContainerButton>
       <DataGrid />
       <FooterTable precioFinal={sumaDePrecios()} />
       <ModalAñadirProd show={show} setShow={setShow} />
-    </div>
+    </Container>
   );
 };
 

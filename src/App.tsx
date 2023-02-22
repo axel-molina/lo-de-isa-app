@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 // Pages
 import Home from './pages/Home';
-import CrearVenta from './pages/CrearVenta';
+import CrearVenta from './pages/CreateSale';
 
 function App() {
   return (

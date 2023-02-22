@@ -1,12 +1,12 @@
 import React from 'react';
 // Components
-import SaldoTotal from '../../components/SaldoTotal';
+import TotalBalance from '../../components/TotalBalance';
 import ListMenu from './components/ListMenu';
 
 const index = () => {
   return (
     <div>
-      <SaldoTotal />
+      <TotalBalance />
         <ListMenu />
     </div>
   )

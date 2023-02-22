@@ -1,8 +1,10 @@
 import React from 'react';
-import { Box, Modal, Input, Typography, InputAdornment } from '@mui/material';
+import { Input, Typography, InputAdornment } from '@mui/material';
 import { Close, Search } from '@mui/icons-material';
 // Componenets
 import DataGridModal from './DataGridModal';
+// Styles
+import { ModalStyled, Container } from '../styles/ModalStyled';
 
 interface IModal {
   show: boolean;
@@ -16,25 +18,8 @@ const ModalAñadirProd = ({ show, setShow }: IModal) => {
   };
 
   return (
-    <Modal
-      open={show}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-    >
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 600,
-          bgcolor: 'background.paper',
-          boxShadow: 24,
-          p: 4,
-          borderRadius: '10px',
-        }}
-      >
-        <div>
+    <Container show={show}>
+        <ModalStyled >
           <div
             style={{
               display: 'flex',
@@ -52,7 +37,7 @@ const ModalAñadirProd = ({ show, setShow }: IModal) => {
           <Input
             id="Buscar"
             placeholder="Buscar"
-            sx={{ width: '100%', mt: 2 }}
+            sx={{ width: '100%', mt: 2, mb: 2 }}
             startAdornment={
               <InputAdornment position="start">
                 <Search />
@@ -60,9 +45,8 @@ const ModalAñadirProd = ({ show, setShow }: IModal) => {
             }
           />
           <DataGridModal />
-        </div>
-      </Box>
-    </Modal>
+        </ModalStyled>
+    </Container>
   );
 };
 

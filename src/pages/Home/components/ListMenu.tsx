@@ -12,7 +12,7 @@ const ListMenu = () => {
 
   return (
     <List sx= {{
-        margin: '0'
+        marginTop: '30px'
     }}>
         <Divider />
         <ListItemButton onClick={() => handleClick("/venta")}>

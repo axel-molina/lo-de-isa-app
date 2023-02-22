@@ -8,6 +8,7 @@ import {
   HeaderGridStyled,
   ItemContainerStyled,
   ContainerGridStyled,
+  InfoStyled,
 } from '../styles/DataGridStyled';
 // Redux
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -37,19 +38,18 @@ const DataGrid = () => {
     <ContainerGridStyled>
       <HeaderGridStyled>
         <div>Producto</div>
-        <div>Código</div>
-        <div>Precio</div>
-        <div>Cantidad</div>
         <div>Eliminar</div>
         <div>Eliminar todo</div>
       </HeaderGridStyled>
       {productosEnOrdenDeVenta.map((item: IProducts) => (
         <ItemContainerStyled key={item.id}>
-          <div>{item.nombre}</div>
-          <div>{item.codigo}</div>
-          <div>${item.precio.toFixed(2)}</div>
-          <div style={{ marginLeft: '22px' }}>{item.cantidad}</div>
           <div>
+          <b>{item.nombre}</b>
+          <InfoStyled>Código: {item.codigo}</InfoStyled>
+          <InfoStyled>${item.precio.toFixed(2)}</InfoStyled>
+          <InfoStyled>Cantidad: {item.cantidad}</InfoStyled>
+          </div>
+          <div style={{  }}>
             <Button
               variant="contained"
               color="error"
@@ -58,7 +58,7 @@ const DataGrid = () => {
               <Delete />
             </Button>
           </div>
-          <div>
+          <div style={{  }}>
             <Button
               variant="contained"
               color="error"
