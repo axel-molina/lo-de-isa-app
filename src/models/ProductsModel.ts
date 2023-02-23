@@ -1,8 +1,8 @@
 export interface IProducts {
     id: number;
-    nombre: string;
-    precio: number;
-    cantidad: number;
+    name: string;
+    price: number;
     stock: number;
-    codigo: string;
+    code: string;
+    quantity: number;
 }

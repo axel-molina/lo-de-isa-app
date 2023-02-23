@@ -44,12 +44,13 @@ const DataGrid = () => {
       {productosEnOrdenDeVenta.map((item: IProducts) => (
         <ItemContainerStyled key={item.id}>
           <div>
-          <b>{item.nombre}</b>
-          <InfoStyled>Código: {item.codigo}</InfoStyled>
-          <InfoStyled>${item.precio.toFixed(2)}</InfoStyled>
-          <InfoStyled>Cantidad: {item.cantidad}</InfoStyled>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <b>{item.name}</b>
+              <InfoStyled>x{item.quantity}</InfoStyled>
+            </div>
+            <InfoStyled>${item.price.toFixed(2)}</InfoStyled>
           </div>
-          <div style={{  }}>
+          <div style={{}}>
             <Button
               variant="contained"
               color="error"
@@ -58,7 +59,7 @@ const DataGrid = () => {
               <Delete />
             </Button>
           </div>
-          <div style={{  }}>
+          <div style={{}}>
             <Button
               variant="contained"
               color="error"

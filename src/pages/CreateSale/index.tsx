@@ -22,7 +22,7 @@ const Index = () => {
   const sumaDePrecios = (): number => {
     let suma = 0;
     ListaOrdenDeVenta.forEach((item: IProducts) => {
-      suma += item.precio * item.cantidad;
+      suma += item.price * item.quantity;
     });
     return suma;
   };

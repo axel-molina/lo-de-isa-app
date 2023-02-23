@@ -30,8 +30,8 @@ const DataGridModal = () => {
       </HeaderGridStyledModal>
       {productsList.map((item: IProducts) => (
         <ItemContainerStyledModal key={item.id} onClick={() => addItem(item)}>
-          <div>{item.nombre}</div>
-          <div style={{ marginLeft: '25%' }}>${item.precio.toFixed(2)}</div>
+          <div>{item.name}</div>
+          <div style={{ marginLeft: '25%' }}>${item.price.toFixed(2)}</div>
           <div style={{ marginLeft: '48%' }}>{item.stock}</div>
         </ItemContainerStyledModal>
       ))}

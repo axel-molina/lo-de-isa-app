@@ -3,12 +3,19 @@ import { useHover } from 'usehooks-ts';
 import { Space, Avatar } from 'antd';
 // Styles
 import { AvatarContainer , EditStyled, ContainerStyled} from './style';
+// Redux
+import { useAppSelector } from '../../app/hooks';
 
 
 const index = () => {
 
   const hoverRef = useRef(null)
   const isHover = useHover(hoverRef)
+
+  const bankAccount = useAppSelector((state) => state.userData.bank);
+
+  // Mostart precio con dos decimales
+  const bank = bankAccount?.toFixed(2).replace('.', ',');
 
   return (
     <Space direction='vertical' size={16}>
@@ -22,7 +29,7 @@ const index = () => {
         
             <ContainerStyled >
             <span><b>Bienvenido!</b> Axel Molina</span>
-            <span><b>Total:</b> $120.000,00</span>
+            <span><b>Total:</b> ${bank}</span>
             </ContainerStyled>
          </Space>
     </Space>

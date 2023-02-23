@@ -7,7 +7,7 @@ export const ContainerGridStyled = styled.div`
   overflow-y: scroll;
 
   @media (max-width: 480px) {
-    height: 65vh;
+    height: 50vh;
   }
 `;
 

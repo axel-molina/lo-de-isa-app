@@ -16,7 +16,7 @@ export const productsInSalesOrderSlice = createSlice({
         (product) => product.id === action.payload.id
       );
       if (productIndex !== -1) {
-        state[productIndex].cantidad += action.payload.cantidad;
+        state[productIndex].quantity += action.payload.quantity;
         return;
       }
       // Si el producto no existe en el carrito, se agrega
@@ -28,8 +28,8 @@ export const productsInSalesOrderSlice = createSlice({
         (product) => product.id === action.payload.id
       );
       if (productIndex !== -1) {
-        state[productIndex].cantidad -= 1;
-        if (state[productIndex].cantidad <= 0) {
+        state[productIndex].quantity -= 1;
+        if (state[productIndex].quantity <= 0) {
           state.splice(productIndex, 1);
         }
         return;
