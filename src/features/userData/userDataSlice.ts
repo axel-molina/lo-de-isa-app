@@ -30,7 +30,7 @@ export const userDataSlice = createSlice({
 export const { editBank } =
 userDataSlice.actions;
 
-export const selectProductsInSalesOrder = (state: RootState) =>
-  state.productosEnOrdenDeVenta;
+export const selectUserData = (state: RootState) =>
+  state.userData;
 
 export default userDataSlice.reducer;

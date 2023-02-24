@@ -18,6 +18,7 @@ const index = () => {
   const bank = bankAccount?.toFixed(2).replace('.', ',');
 
   return (
+    <div style={{ margin: "0 10px" }}>
     <Space direction='vertical' size={16}>
       <Space wrap size={16}>
         
@@ -33,6 +34,7 @@ const index = () => {
             </ContainerStyled>
          </Space>
     </Space>
+    </div>
   );
 };
 

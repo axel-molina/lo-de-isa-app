@@ -1,17 +1,35 @@
-import React from 'react'
-import { Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import {
+  TitleStyled,
+  LinkStyled,
+  ContainerStyled,
+  MenuContainerStyled,
+} from './style';
+import icon from '../../assets/images/molino.png';
+import { MenuOutlined } from '@mui/icons-material';
+import { useAppDispatch } from '../../app/hooks';
+import { showDrawer } from '../../features/drawer/drawerSlice';
 
 const index = () => {
-  return (
-    <Container sx={{
-        textAlign: 'center',
-    }}>
-        <h1>
-          <Link to="/">Lo de Isa App</Link>
-        </h1>
-    </Container>
-  )
-}
+  const dispatch = useAppDispatch();
 
-export default index
+  const handleShow = () => {
+    dispatch(showDrawer(true));
+  };
+
+  return (
+    <ContainerStyled>
+      <TitleStyled>
+        <LinkStyled to="/">
+          <img src={icon} alt="molisoft icon" style={{ width: '2rem' }} />
+          Molisoft
+        </LinkStyled>
+      </TitleStyled>
+      <MenuContainerStyled onClick={() => handleShow()}>
+        <MenuOutlined style={{ color: '#1b7d98', fontSize: '2rem' }} />
+      </MenuContainerStyled>
+    </ContainerStyled>
+  );
+};
+
+export default index;

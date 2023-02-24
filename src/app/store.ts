@@ -1,13 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productsSlice from '../features/products/productSlice';
-import productsInSalesOrderSlice from '../features/productsInSalesOrder/productsInSalesOrderSlice';
-import userDataSlice from '../features/userData/userDataSlice';
+import { productsInSalesOrderSlice, productSlice, userDataSlice, drawerSlice } from '../features';
 
 export const store = configureStore({
   reducer: {
     productosEnOrdenDeVenta: productsInSalesOrderSlice,
-    productos: productsSlice,
+    productos: productSlice,
     userData: userDataSlice,
+    drawer: drawerSlice,
   },
 });
 
