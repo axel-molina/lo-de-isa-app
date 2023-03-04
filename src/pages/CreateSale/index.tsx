@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 // Components
+import Header from '../../components/Header';
 import DataGrid from './components/DataGrid';
 import Button from '@mui/material/Button';
 import { Add } from '@mui/icons-material';
@@ -37,6 +38,8 @@ const Index = () => {
   }, [ListaOrdenDeVenta]);
 
   return (
+    <>
+    <Header />
     <Container>
       <ContainerButton>
         <Button
@@ -55,6 +58,7 @@ const Index = () => {
       <FooterTable precioFinal={sumaDePrecios()} />
       <ModalAñadirProd show={show} setShow={setShow} />
     </Container>
+    </>
   );
 };
 

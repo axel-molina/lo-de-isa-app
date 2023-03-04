@@ -31,6 +31,9 @@ const FooterTable = ({ precioFinal }: IPrice) => {
   };
 
   const handleSell = () => {
+    if (precioFinal === 0) {
+      return;
+    }
     dispatch(editBank(precioFinal))
     // limpiar carrito redux
     dispatch(clearCart("clear"));

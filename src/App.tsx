@@ -1,22 +1,40 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import RequireAuth from './utils/requireAuth';
 
 // Components
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 // Pages
-import Home from './pages/Home';
-import CrearVenta from './pages/CreateSale';
+const Home = lazy(() => import('./pages/Home'));
+const CrearVenta = lazy(() => import('./pages/CreateSale'));
+const IniciarSesion = lazy(() => import('./pages/SignIn'));
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/venta" element={<CrearVenta />} />
-      </Routes>
-      <Drawer />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/venta"
+            element={
+              <RequireAuth>
+                <CrearVenta />
+              </RequireAuth>
+            }
+          />
+          <Route path="/iniciar-sesion" element={<IniciarSesion />} />
+        </Routes>
+        <Drawer />
+      </Suspense>
     </div>
   );
 }

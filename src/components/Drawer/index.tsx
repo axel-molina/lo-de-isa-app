@@ -12,10 +12,9 @@ const index = () => {
 
   return (
     <div>
-        <Drawer title="Basic Drawer" placement="right" onClose={onClose} open={open}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <Drawer title="Molisoft" placement="left" onClose={onClose} open={open}>
+        <p>Ajustes</p>
+        <p>Cerrar sesión</p>
       </Drawer>
     </div>
   )

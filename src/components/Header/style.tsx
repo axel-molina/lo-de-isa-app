@@ -32,10 +32,21 @@ export const MenuContainerStyled = styled.div`
     justify-content: center;
     align-items: center;
     padding: 3px;
+    display: none;
     transition: all 0.3s ease-in-out;
     &:hover {
         cursor: pointer;
         background-color: #7acd9656;
         border-radius: 50%;
+    }
+    @media (max-width: 480px) {
+        display: flex;
+    }
+`;
+
+export const CloseSessionContainerStyled = styled.div`
+display: flex;
+    @media (max-width: 480px) {
+        display: none;
     }
 `;
