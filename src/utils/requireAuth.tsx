@@ -1,9 +1,9 @@
 import IniciarSesion from '../pages/SignIn';
-import { getToken } from './api_helper';
+import useFetchHook from '../hooks/useFetchHook';
 
-const RequireAuth = ({ children }: any) => {
+const RequireAuth = ({ children }: any ) => {
+  const { getToken } = useFetchHook();
   const token = getToken();
-  console.log(token);
   if (token === '') {
     return <IniciarSesion />;
   }

@@ -24,7 +24,8 @@
     "@typescript-eslint/no-require-imports": "warn",
     "@typescript-eslint/restrict-plus-operands": "error",
     "@typescript-eslint/strict-boolean-expressions": 0,
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"]
 }

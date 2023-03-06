@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import RequireAuth from './utils/requireAuth';
 
 // Components
-import Header from './components/Header';
 import Drawer from './components/Drawer';
+import { PageRoutes } from './routes';
 // Pages
 const Home = lazy(() => import('./pages/Home'));
 const CrearVenta = lazy(() => import('./pages/CreateSale'));
@@ -24,14 +24,14 @@ function App() {
             }
           />
           <Route
-            path="/venta"
+            path={PageRoutes.venta}
             element={
               <RequireAuth>
                 <CrearVenta />
               </RequireAuth>
             }
           />
-          <Route path="/iniciar-sesion" element={<IniciarSesion />} />
+          <Route path={PageRoutes.iniciarSesion} element={<IniciarSesion />} />
         </Routes>
         <Drawer />
       </Suspense>

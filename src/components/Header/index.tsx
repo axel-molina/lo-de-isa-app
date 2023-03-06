@@ -20,6 +20,11 @@ const index = () => {
     dispatch(showDrawer(true));
   };
 
+  const closeSession = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <ContainerStyled>
       <TitleStyled>
@@ -32,7 +37,7 @@ const index = () => {
         <MenuOutlined style={{ color: '#1b7d98', fontSize: '2rem' }} />
       </MenuContainerStyled>
       <CloseSessionContainerStyled>
-        <Button color='error'>
+        <Button color='error' onClick={() => closeSession()}>
           Cerrar sesión
         </Button>
         <Button>
