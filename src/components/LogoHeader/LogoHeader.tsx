@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from '../../../assets/images/molino.png';
+import Logo from '../../assets/images/molino.png';
 
-const HeaderSignIn = () => {
+const LogoHeader = () => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: "center" }}>
 
@@ -24,4 +24,4 @@ const HeaderSignIn = () => {
   );
 };
 
-export default HeaderSignIn;
+export default LogoHeader;

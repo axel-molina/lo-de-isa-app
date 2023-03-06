@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Form, Input } from 'antd';
 import useFetchHook from '../../../hooks/useFetchHook';
+import { PageRoutes } from '../../../routes';
 
 const FormSignIn = () => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const email = "admin@test.com";
-  const pass = "admin123";
+  const email = 'admin@test.com';
+  const pass = 'admin123';
 
   const { request, isLoading, data } = useFetchHook();
 
@@ -17,12 +17,16 @@ const FormSignIn = () => {
     request(values, 'POST');
   };
 
+  // Al registrarse
+  const handleRegister = () => {
+    navigate(PageRoutes.registro);
+  };
+
   useEffect(() => {
     if (data.token) {
-      navigate("/");
+      navigate('/');
     }
   }, [data]);
-  
 
   return (
     <Form
@@ -34,7 +38,6 @@ const FormSignIn = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '30px',
       }}
     >
       <div>
@@ -59,7 +62,6 @@ const FormSignIn = () => {
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            marginBottom: '30px',
           }}
         >
           <Form.Item name="remember" valuePropName="checked">
@@ -80,7 +82,7 @@ const FormSignIn = () => {
           <Button type="primary" htmlType="submit" block loading={isLoading}>
             Iniciar sesión
           </Button>
-          <Button type="default" block>
+          <Button type="default" block onClick={() => handleRegister()}>
             Registrarme
           </Button>
         </div>

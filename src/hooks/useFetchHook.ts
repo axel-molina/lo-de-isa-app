@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Routes } from '../api/routes_api';
 
 type Ttoken = {
@@ -10,6 +10,7 @@ type Ttoken = {
 const useFetchHook = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<any>([]);
+  const [error, setError] = useState<any>("");
 
   const API_URL = "https://molisoft-api.onrender.com";
 
@@ -47,6 +48,8 @@ const useFetchHook = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+      setError(error);
+      // eslint-disable-next-line
       console.log(error);
     }
   };
@@ -54,6 +57,7 @@ const useFetchHook = () => {
   return {
     request,
     data,
+    error,
     setToken,
     getToken,
     isLoading,

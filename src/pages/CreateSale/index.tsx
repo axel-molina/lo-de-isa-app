@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 // Components
-import Header from '../../components/Header';
+import Header from '../../components/NavBar';
 import DataGrid from './components/DataGrid';
 import Button from '@mui/material/Button';
 import { Add } from '@mui/icons-material';

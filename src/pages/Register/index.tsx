@@ -1,16 +1,13 @@
-import React from 'react';
-import FormSignIn from './components/FormSignIn';
 import LogoHeader from '../../components/LogoHeader/LogoHeader';
-
+import FormRegister from './components/FormRegister';
 
 const index = () => {
-
   return (
     <div style={{ marginTop: "6%"}}>
         <LogoHeader />
-        <FormSignIn />
+        <FormRegister />
     </div>
-  );
-};
+  )
+}
 
-export default index;
+export default index

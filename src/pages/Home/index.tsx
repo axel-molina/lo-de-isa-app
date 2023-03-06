@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/Header';
+import Header from '../../components/NavBar';
 // Components
 import TotalBalance from '../../components/TotalBalance';
 import ListMenu from './components/ListMenu';

@@ -7,6 +7,7 @@ import Drawer from './components/Drawer';
 import { PageRoutes } from './routes';
 // Pages
 const Home = lazy(() => import('./pages/Home'));
+const Register = lazy(() => import('./pages/Register'));
 const CrearVenta = lazy(() => import('./pages/CreateSale'));
 const IniciarSesion = lazy(() => import('./pages/SignIn'));
 
@@ -31,6 +32,7 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route path={PageRoutes.registro} element={<Register />} />
           <Route path={PageRoutes.iniciarSesion} element={<IniciarSesion />} />
         </Routes>
         <Drawer />
