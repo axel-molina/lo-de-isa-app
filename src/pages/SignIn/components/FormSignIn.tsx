@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Form, Input } from 'antd';
-import useFetchHook from '../../../hooks/useFetchHook';
+import useLoginHook from '../../../hooks/useLoginHook';
 import { PageRoutes } from '../../../routes';
 
 const FormSignIn = () => {
@@ -10,23 +10,17 @@ const FormSignIn = () => {
   const email = 'admin@test.com';
   const pass = 'admin123';
 
-  const { request, isLoading, data } = useFetchHook();
+  const { login, isLoading } = useLoginHook();
 
   // Al iniciar sesión
   const onFinish = (values: any) => {
-    request(values, 'POST');
+    login(values);
   };
 
   // Al registrarse
   const handleRegister = () => {
     navigate(PageRoutes.registro);
   };
-
-  useEffect(() => {
-    if (data.token) {
-      navigate('/');
-    }
-  }, [data]);
 
   return (
     <Form

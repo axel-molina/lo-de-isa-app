@@ -1,51 +1,34 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Input, message, Upload } from 'antd';
-import type { UploadProps } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Button, Form, Input, message } from 'antd';
 import { PageRoutes } from '../../../routes';
+// Hook
+
 // Styles
 import {
   InputStyled,
   LabelStyled,
   FormPassStyled,
-  UploadButtonStyled,
   FormContainerStyled,
   ButtonContainersStyled,
   ContainerMediaInputStyled,
   ContainerMediaLabelStyled,
   ContainerMediaInputPassStyled,
 } from '../styles/FormRegister';
+import useRegisterHook from '../../../hooks/useRegisterHook';
 
 const FormRegister = () => {
   const navigate = useNavigate();
 
-  const props: UploadProps = {
-    name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        // eslint-disable-next-line
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
-
-  const handleRegister = () => {
-    // eslint-disable-next-line
-    console.log('registrar');
-  };
+    const { register, isLoading } = useRegisterHook();
 
   const handleReturnToLogin = () => {
     navigate(PageRoutes.iniciarSesion);
+  };
+
+  // Al presionar registrarse
+  const handleRegister = (values: any) => {
+    register(values);
   };
 
   return (
@@ -60,7 +43,7 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Nombre</LabelStyled>
             <Form.Item
-              name="name"
+              name="Name"
               rules={[{ required: true, message: 'Ingrese su nombre' }]}
             >
               <InputStyled placeholder="Nombre" />
@@ -70,7 +53,7 @@ const FormRegister = () => {
           {/* Apellido */}
           <ContainerMediaLabelStyled>
             <LabelStyled>Apellido</LabelStyled>
-            <Form.Item name="lastname">
+            <Form.Item name="Lastname">
               <InputStyled placeholder="Apellido" />
             </Form.Item>
           </ContainerMediaLabelStyled>
@@ -81,23 +64,19 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Email</LabelStyled>
             <Form.Item
-              name="email"
+              name="Email"
               rules={[{ required: true, message: 'Ingrese su email' }]}
             >
               <InputStyled placeholder="Email" />
             </Form.Item>
           </ContainerMediaLabelStyled>
 
-          {/* Avatar */}
+          {/* Avatar url */}
           <ContainerMediaLabelStyled>
-            <LabelStyled>Imagen de perfil</LabelStyled>
-            <div style={{ margin: '0 0 24px 0' }}>
-              <Upload {...props}>
-                <UploadButtonStyled icon={<UploadOutlined />}>
-                  Click to Upload
-                </UploadButtonStyled>
-              </Upload>
-            </div>
+            <LabelStyled>Avatar (url)</LabelStyled>
+            <Form.Item name="Avatar">
+              <InputStyled placeholder="url" type="url" />
+            </Form.Item>
           </ContainerMediaLabelStyled>
 
           {/* Numero de contacto */}
@@ -114,7 +93,7 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Contraseña</LabelStyled>
             <FormPassStyled
-              name="password"
+              name="Password"
               rules={[{ required: true, message: 'Ingrese su contraseña' }]}
             >
               <Input.Password placeholder="Contraseña" />
@@ -125,12 +104,13 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Reingresar contraseña</LabelStyled>
             <FormPassStyled
-              name="reenterPassword"
-              rules={[
-                { required: true, message: 'Ingrese su contraseña nuevamente' },
-              ]}
+              name="RePassword"
+              rules={[{ required: true, message: 'Ingrese su contraseña' }]}
             >
-              <Input.Password placeholder="Contraseña" />
+              <Input.Password
+                placeholder="Contraseña"
+                style={{ maxWidth: '100%' }}
+              />
             </FormPassStyled>
           </ContainerMediaLabelStyled>
         </ContainerMediaInputPassStyled>
@@ -140,10 +120,8 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Nombre de tu negocio </LabelStyled>
             <Form.Item
-              name="businessName"
-              rules={[
-                { required: true, message: 'Ingrese el nombre de su negocio' },
-              ]}
+              name="BusinessName"
+              rules={[{ required: true, message: 'Ingrese su negocio' }]}
             >
               <InputStyled placeholder="Nombre de tu negocio" />
             </Form.Item>
@@ -153,11 +131,11 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Dinero actual en cuenta </LabelStyled>
             <Form.Item
-              name="bank"
+              name="Bank"
               rules={[
                 {
                   required: true,
-                  message: 'Ingrese el dinero actual en su cuenta',
+                  message: 'Ingrese el dinero actual',
                 },
               ]}
             >
@@ -167,7 +145,7 @@ const FormRegister = () => {
         </ContainerMediaInputStyled>
 
         <ButtonContainersStyled>
-          <Button type="primary" htmlType="submit" block>
+          <Button type="primary" htmlType="submit" block loading={isLoading}>
             Registrarme
           </Button>
           <Button type="default" block onClick={() => handleReturnToLogin()}>

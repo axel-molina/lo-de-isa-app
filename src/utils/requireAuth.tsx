@@ -1,8 +1,8 @@
 import IniciarSesion from '../pages/SignIn';
-import useFetchHook from '../hooks/useFetchHook';
+import useFetchHook from '../hooks/useLoginHook';
+import { getToken } from './token';
 
 const RequireAuth = ({ children }: any ) => {
-  const { getToken } = useFetchHook();
   const token = getToken();
   if (token === '') {
     return <IniciarSesion />;
