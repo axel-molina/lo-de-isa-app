@@ -5,7 +5,6 @@ import { Routes } from '../api/routes_api';
 import { PageRoutes } from '../routes';
 import { API_URL } from '../utils/api_url';
 
-
 // TODO: Capturar errores de peticion
 
 const useRegisterHook = () => {
@@ -48,6 +47,12 @@ const useRegisterHook = () => {
         body: JSON.stringify(body),
       });
 
+      if(!response.ok) {
+        message.error('Ya existe un usuario registrado con ese email');
+        setIsLoading(false);
+        return;
+      } 
+
       if (response.status === 201) {
         message.success('Usuario registrado con éxito');
         navigate(PageRoutes.iniciarSesion);
@@ -55,10 +60,8 @@ const useRegisterHook = () => {
 
       setIsLoading(false);
 
-    } catch (err: any) {
+    } catch (error: any) {
       setIsLoading(false);
-      message.error('Ya existe un usuario registrado con ese email');
-      console.log(err.message);
     }
   };
 
