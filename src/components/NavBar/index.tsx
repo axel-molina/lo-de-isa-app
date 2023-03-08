@@ -12,9 +12,12 @@ import { MenuOutlined } from '@mui/icons-material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useAppDispatch } from '../../app/hooks';
 import { showDrawer } from '../../features/drawer/drawerSlice';
+import { useNavigate } from 'react-router-dom';
+import { PageRoutes } from '../../routes';
 
 const index = () => {
   const dispatch = useAppDispatch();
+  const navigation = useNavigate()
 
   const handleShow = () => {
     dispatch(showDrawer(true));
@@ -22,7 +25,7 @@ const index = () => {
 
   const closeSession = () => {
     localStorage.clear();
-    window.location.reload();
+    navigation(PageRoutes.iniciarSesion);
   };
 
   return (
