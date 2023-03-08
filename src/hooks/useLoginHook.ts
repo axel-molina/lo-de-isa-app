@@ -13,6 +13,15 @@ const useLoginHook = () => {
 
   const login = async (body:  any) => {
     setIsLoading(true);
+
+    // validar email 
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!emailRegex.test(body.email)) {
+      message.error('El email no tiene un formato válido');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(API_URL + Routes.login, {
         method: 'POST',
