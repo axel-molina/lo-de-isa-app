@@ -21,13 +21,23 @@ export const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
+    setUser: (state, action: PayloadAction<IUserData>) => {
+        state.id = action.payload.id;
+        state.name = action.payload.name;
+        state.lastname = action.payload.lastname;
+        state.avatar = action.payload.avatar;
+        state.email = action.payload.email;
+        state.number = action.payload.number;
+        state.businessName = action.payload.businessName;
+        state.bank = action.payload.bank;
+    },
     editBank: (state, action: PayloadAction<number>) => {
         state.bank = action.payload;
     }
     },
 });
 
-export const { editBank } =
+export const { editBank, setUser } =
 userDataSlice.actions;
 
 export const selectUserData = (state: RootState) =>

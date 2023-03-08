@@ -1,5 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productsInSalesOrderSlice, productSlice, userDataSlice, drawerSlice } from '../features';
+import {
+  productsInSalesOrderSlice,
+  productSlice,
+  userDataSlice,
+  drawerSlice,
+  tokenSlice,
+} from '../features';
 
 export const store = configureStore({
   reducer: {
@@ -7,6 +13,7 @@ export const store = configureStore({
     productos: productSlice,
     userData: userDataSlice,
     drawer: drawerSlice,
+    token: tokenSlice,
   },
 });
 

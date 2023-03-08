@@ -1,11 +1,20 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Checkbox, Form, Input } from 'antd';
-import useLoginHook from '../../../hooks/useLoginHook';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import { PageRoutes } from '../../../routes';
+import useLoginHook from '../../../hooks/useLoginHook';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import useUserDataHook from '../../../hooks/useUserDataHook';
+import { setUser } from '../../../features/userData/userDataSlice';
 
 const FormSignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const [userEmail, setUserEmail] = useState("");
+  const { getUserData, userData } = useUserDataHook();
+
+  const token = useAppSelector((state) => state.token.value);
 
   const email = 'admin@test.com';
   const pass = 'admin123';
@@ -14,6 +23,7 @@ const FormSignIn = () => {
 
   // Al iniciar sesión
   const onFinish = (values: any) => {
+    setUserEmail(values.email);
     login(values);
   };
 
@@ -21,6 +31,22 @@ const FormSignIn = () => {
   const handleRegister = () => {
     navigate(PageRoutes.registro);
   };
+
+
+  useEffect(() => {
+    if (token !== "") {
+      getUserData(userEmail);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (userData.id !== 0) {
+      message.success(`Bienvenido ${userData.name}`);
+      dispatch(setUser(userData));
+      navigate("/home");
+    }
+  }, [userData]);
+  
 
   return (
     <Form

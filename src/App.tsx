@@ -34,6 +34,7 @@ function App() {
           />
           <Route path={PageRoutes.registro} element={<Register />} />
           <Route path={PageRoutes.iniciarSesion} element={<IniciarSesion />} />
+          <Route path="*" element={<Home />} />
         </Routes>
         <Drawer />
       </Suspense>

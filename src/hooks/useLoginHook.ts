@@ -1,14 +1,14 @@
 import { message } from 'antd';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Routes } from '../api/routes_api';
+import { useAppDispatch } from '../app/hooks';
+import { setTokenRedux } from '../features/token/tokenSlice';
 import { API_URL } from '../utils/api_url';
 import { setToken } from '../utils/token';
 
 const useLoginHook = () => {
-  const navigate = useNavigate();
-
-  const [error, setError] = useState<any>("");
+  const dispatch = useAppDispatch();
+  
   const [isLoading, setIsLoading] = useState(false);
 
   const login = async (body:  any) => {
@@ -24,8 +24,7 @@ const useLoginHook = () => {
       const data = await response.json();
       if(data.token){
         setToken(data.token);
-        message.success("Bienvenido");
-        navigate('/');
+        dispatch(setTokenRedux(data.token));
       }
       setIsLoading(false);
     } catch (error: any) {
@@ -36,7 +35,6 @@ const useLoginHook = () => {
 
   return {
     login,
-    error,
     isLoading,
   };
 };
