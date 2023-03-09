@@ -43,7 +43,7 @@ const FormSignIn = () => {
     if (userData.id !== 0) {
       message.success(`Bienvenido ${userData.name}`);
       dispatch(setUser(userData));
-      navigate("/home");
+      navigate("/inicio");
     }
   }, [userData]);
   
