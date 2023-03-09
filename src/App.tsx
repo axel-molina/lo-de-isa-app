@@ -15,7 +15,7 @@ const IniciarSesion = lazy(() => import('./pages/SignIn'));
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<div style={{ margin: "25% auto" }}>
+      <Suspense fallback={<div style={{ display: "flex", justifyContent: "center", alignContent: "center", marginTop: "30%" }}>
         <Spinner />
       </div>}>
         <Routes>
