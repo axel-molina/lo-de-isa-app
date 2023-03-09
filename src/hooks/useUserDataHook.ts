@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Routes } from '../api/routes_api';
 import { IUserData } from '../models/UserModel';
 import { API_URL } from '../utils/api_url';
 import { getToken } from '../utils/token';
+import { useAppDispatch } from '../app/hooks';
+import { setUser } from '../features/userData/userDataSlice';
 
 const useUserDataHook = () => {
 
+    const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [userData, setUserData] = useState<IUserData>(
         {
@@ -27,6 +30,7 @@ const useUserDataHook = () => {
 
 
     const getUserData = async (email: string) => {
+        setIsLoading(true);
         try {
             const response = await fetch(`${API_URL}${Routes.viewprofile}?email=${email}`, {
                 method: 'GET',
@@ -39,11 +43,13 @@ const useUserDataHook = () => {
             const data = await response.json();
              if(response.ok){
                 setUserData(data);
-                setIsLoading(false);
-             }
+                dispatch(setUser(data));
+            }
+            
+            setIsLoading(false);
             
         } catch (error) {
-            console.log(error);
+            setIsLoading(false);
         }
         
     }

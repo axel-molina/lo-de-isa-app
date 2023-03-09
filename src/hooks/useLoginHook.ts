@@ -33,6 +33,7 @@ const useLoginHook = () => {
       const data = await response.json();
       if(data.token){
         setToken(data.token);
+        localStorage.setItem('email', body.email);
         dispatch(setTokenRedux(data.token));
       }
       setIsLoading(false);

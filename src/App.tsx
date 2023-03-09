@@ -5,7 +5,7 @@ import RequireAuth from './utils/requireAuth';
 // Components
 import Drawer from './components/Drawer';
 import { PageRoutes } from './routes';
-import Spinner from './components/Spinner/Spinner';
+import Spinner from './components/Loading/Spinner';
 // Pages
 const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/Register'));
