@@ -3,3 +3,11 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.ant-drawer-header {
+    padding: 0 10px !important;
+}
+
+.ant-drawer-close {
+    display: none !important;
+}

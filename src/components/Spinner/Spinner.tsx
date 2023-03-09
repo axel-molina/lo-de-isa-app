@@ -3,7 +3,7 @@ import React from 'react';
 
 const Spinner = () => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center'}}>
       <Spin />
     </div>
   );

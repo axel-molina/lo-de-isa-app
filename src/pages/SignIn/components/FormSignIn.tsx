@@ -34,7 +34,7 @@ const FormSignIn = () => {
 
 
   useEffect(() => {
-    if (token !== "") {
+    if (token !== "" && userEmail !== "") {
       getUserData(userEmail);
     }
   }, [token]);

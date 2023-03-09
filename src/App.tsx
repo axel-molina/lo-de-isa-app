@@ -5,7 +5,7 @@ import RequireAuth from './utils/requireAuth';
 // Components
 import Drawer from './components/Drawer';
 import { PageRoutes } from './routes';
-import Spinner from './components/Loading/Spinner';
+import Spinner from './components/Spinner/Spinner';
 // Pages
 const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/Register'));
@@ -15,9 +15,13 @@ const IniciarSesion = lazy(() => import('./pages/SignIn'));
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<div style={{ display: "flex", justifyContent: "center", alignContent: "center", marginTop: "30%" }}>
-        <Spinner />
-      </div>}>
+      <Suspense
+        fallback={
+          <div style={{ marginTop: '30%' }}>
+            <Spinner />
+          </div>
+        }
+      >
         <Routes>
           <Route
             path="/"
