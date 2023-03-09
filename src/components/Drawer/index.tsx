@@ -28,7 +28,7 @@ const index = () => {
   return (
     <div>
       <Drawer anchor={'bottom'} open={open} onClose={onClose}>
-        <div style={{ padding: '0 10px' }}>
+        <div style={{ padding: '5px 10px' }}>
           <ListItemButton>
             <ListItemIcon>
               <Settings />
