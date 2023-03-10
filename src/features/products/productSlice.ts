@@ -3,24 +3,23 @@ import { RootState } from '../../app/store';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 import { IProducts } from '../../models/ProductsModel';
-import products from '../../data/Products';
 
-const initialState: IProducts[] = products;
-
+const initialState: any = [];
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<IProducts>) => {
-      state.push(action.payload);
+    addProducts: (state, action: PayloadAction<IProducts>) => {
+      // console.log('action.payload', action.payload);
+      state = action.payload;
     },
     removeProduct: (state, action: PayloadAction<IProducts>) => {
-      return state.filter((product) => product.id !== action.payload.id);
+      return state.filter((product: any) => product.id !== action.payload.id);
     },
   },
 });
 
-export const { addProduct, removeProduct } = productsSlice.actions;
+export const { addProducts, removeProduct } = productsSlice.actions;
 
 export const selectProducts = (state: RootState) => state.productos;
 

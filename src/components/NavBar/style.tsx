@@ -19,12 +19,13 @@ export const LinkStyled = styled(Link)`
 `;
 
 export const ContainerStyled = styled.div`
-    border-bottom: 1px solid #1b7d98;
+    box-shadow: 0px 0px 10px black;
     margin-bottom: 30px;
     padding: 0px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #f9f5f5;
 `;
 
 export const MenuContainerStyled = styled.div`

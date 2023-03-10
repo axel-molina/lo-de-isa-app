@@ -6,7 +6,7 @@ import { IUserData } from '../../models/UserModel';
 
 const initialState: IUserData = 
     {
-        id: 0,
+        id: "",
         name: '',
         lastname: '',
         avatar: '',

@@ -1,35 +1,32 @@
 import { useState } from 'react';
-import { Routes } from '../api/routes_api';
-import { IUserData } from '../models/UserModel';
 import { API_URL } from '../utils/api_url';
+import { Routes } from '../api/routes_api';
 import { getToken } from '../utils/token';
 import { useAppDispatch } from '../app/hooks';
-import { setUser } from '../features/userData/userDataSlice';
+import { addProducts } from '../features/products/productSlice';
 
-const useUserDataHook = () => {
+interface IGetProducts {
+  id: string;
+  page: number;
+  limit?: number;
+}
+
+const useProductListHook = () => {
   const dispatch = useAppDispatch();
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [userData, setUserData] = useState<IUserData>({
-    id: '',
-    name: '',
-    lastname: '',
-    avatar: '',
-    email: '',
-    number: '',
-    businessName: '',
-    bank: 0,
-  });
+  const [error, setError] = useState(null);
 
   const token = localStorage.getItem('token') || getToken();
 
   // quitar las comillas del token
   const tokenWithoutQuotes = token?.replace(/['"]+/g, '');
 
-  const getUserData = async (email: string) => {
+  const getProducts = async ({ id, page }: IGetProducts) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${API_URL}${Routes.viewprofile}?email=${email}`,
+        `${API_URL}${Routes.viewProducts}?id=${id}&page=${page}`,
         {
           method: 'GET',
           headers: {
@@ -40,22 +37,24 @@ const useUserDataHook = () => {
       );
 
       const data = await response.json();
-      if (response.ok) {
-        setUserData(data);
-        dispatch(setUser(data));
-      }
 
+      if (response.ok) {
+        setProducts(data);
+        dispatch(addProducts(data));
+      }
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: any) {
+      setError(error);
       setIsLoading(false);
     }
   };
 
   return {
-    getUserData,
-    userData,
+    getProducts,
+    products,
     isLoading,
+    error,
   };
 };
 
-export default useUserDataHook;
+export default useProductListHook;

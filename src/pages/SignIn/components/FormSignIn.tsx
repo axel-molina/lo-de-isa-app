@@ -40,8 +40,8 @@ const FormSignIn = () => {
   }, [token]);
 
   useEffect(() => {
-    if (userData.id !== 0) {
-      message.success(`Bienvenido ${userData.name}`);
+    if (userData?.id !== "") {
+      message.success(`Bienvenido ${userData?.name}`);
       dispatch(setUser(userData));
       navigate("/inicio");
     }
