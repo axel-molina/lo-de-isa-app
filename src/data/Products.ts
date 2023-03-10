@@ -2,7 +2,7 @@ import { IProducts } from '../models/ProductsModel';
 
 const products: IProducts[] = [
   {
-    id: 1,
+    _id: '1',
     name: 'Producto 1',
     price: 100,
     quantity: 1,
@@ -10,7 +10,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 2,
+    _id: '2',
     name: 'Producto 2',
     price: 200,
     quantity: 1,
@@ -18,7 +18,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 3,
+    _id: '3',
     name: 'Producto 3',
     price: 300.50,
     quantity: 1,
@@ -26,7 +26,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 4,
+    _id: '4',
     name: 'Producto 4',
     price: 400,
     quantity: 1,
@@ -34,7 +34,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 5,
+    _id: '5',
     name: 'Producto 5',
     price: 500,
     quantity: 1,
@@ -42,7 +42,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 6,
+    _id: '6',
     name: 'Producto 6',
     price: 600,
     quantity: 1,
@@ -50,7 +50,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 7,
+    _id: '7',
     name: 'Producto 7',
     price: 700,
     quantity: 1,
@@ -58,7 +58,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 8,
+    _id: '8',
     name: 'Producto 8',
     price: 800,
     quantity: 1,
@@ -66,7 +66,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 9,
+    _id: '9',
     name: 'Producto 9',
     price: 900,
     quantity: 1,
@@ -74,7 +74,7 @@ const products: IProducts[] = [
     code: '123456789',
   },
   {
-    id: 10,
+    _id: '10',
     name: 'Producto 10',
     price: 1000,
     quantity: 1,

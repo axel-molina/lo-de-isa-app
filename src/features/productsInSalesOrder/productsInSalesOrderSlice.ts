@@ -13,9 +13,10 @@ export const productsInSalesOrderSlice = createSlice({
     addProduct: (state, action: PayloadAction<IProducts>) => {
       // Si el producto ya existe en el carrito, se aumenta la cantidad
       const productIndex = state.findIndex(
-        (product) => product.id === action.payload.id
+        (product) => product._id === action.payload._id
       );
       if (productIndex !== -1) {
+        // modifico la cantidad
         state[productIndex].quantity += action.payload.quantity;
         return;
       }
@@ -25,7 +26,7 @@ export const productsInSalesOrderSlice = createSlice({
     removeOneProduct: (state, action: PayloadAction<IProducts>) => {
       // Si el producto ya existe en el carrito, se disminuye la cantidad
       const productIndex = state.findIndex(
-        (product) => product.id === action.payload.id
+        (product) => product._id === action.payload._id
       );
       if (productIndex !== -1) {
         state[productIndex].quantity -= 1;
@@ -36,11 +37,11 @@ export const productsInSalesOrderSlice = createSlice({
       }
     },
     removeAllItems: (state, action: PayloadAction<IProducts>) => {
-      return state.filter((product) => product.id !== action.payload.id);
+      return state.filter((product) => product._id !== action.payload._id);
     },
     clearCart: (state, action) => {
       action.payload;
-      return state = [];
+      return (state = []);
     },
   },
 });

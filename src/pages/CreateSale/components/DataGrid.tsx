@@ -42,7 +42,7 @@ const DataGrid = () => {
         <div>Eliminar todo</div>
       </HeaderGridStyled>
       {productosEnOrdenDeVenta.map((item: IProducts) => (
-        <ItemContainerStyled key={item.id}>
+        <ItemContainerStyled key={item._id}>
           <div>
             <div style={{ display: "flex", gap: "10px" }}>
               <b>{item.name}</b>
