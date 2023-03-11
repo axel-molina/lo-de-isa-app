@@ -11,6 +11,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/Register'));
 const CrearVenta = lazy(() => import('./pages/CreateSale'));
 const IniciarSesion = lazy(() => import('./pages/SignIn'));
+const EditarStock = lazy(() => import('./pages/EditStock'));
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
             element={
               <RequireAuth>
                 <CrearVenta />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path={PageRoutes.editarStock}
+            element={
+              <RequireAuth>
+                <EditarStock />
               </RequireAuth>
             }
           />
