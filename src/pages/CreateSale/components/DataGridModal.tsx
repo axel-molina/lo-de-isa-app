@@ -52,8 +52,8 @@ const DataGridModal = () => {
   useEffect(() => {
     if (userData.id) {
       const data = {
-        id: '000000000000000000000000',
-        // id: userData.id,
+        // id: '000000000000000000000000',
+        id: userData.id,
         page: 1,
       };
 

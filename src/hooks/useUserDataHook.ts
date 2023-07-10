@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Routes } from '../api/routes_api';
 import { IUserData } from '../models/UserModel';
 import { API_URL } from '../utils/api_url';
 import { getToken } from '../utils/token';
 import { useAppDispatch } from '../app/hooks';
 import { setUser } from '../features/userData/userDataSlice';
+import { PageRoutes } from '../routes';
 
 const useUserDataHook = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState<IUserData>({
     id: '',
@@ -43,11 +46,12 @@ const useUserDataHook = () => {
       if (response.ok) {
         setUserData(data);
         dispatch(setUser(data));
-      }
+      } 
 
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+      navigate(PageRoutes.iniciarSesion)
     }
   };
 

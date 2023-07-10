@@ -11,7 +11,7 @@ import ModalAñadirProd from './components/ModalAddProd';
 // Redux
 import { useAppSelector } from '../../app/hooks';
 // Styles
-import { Container, ContainerButton } from './styles/Styles';
+import { ContainerStyled, ContainerButton } from './styles/Styles';
 
 const Index = () => {
   const ListaOrdenDeVenta = useAppSelector(
@@ -40,7 +40,7 @@ const Index = () => {
   return (
     <>
     <Header />
-    <Container>
+    <ContainerStyled>
       <ContainerButton>
         <Button
           variant="contained"
@@ -57,7 +57,7 @@ const Index = () => {
       <DataGrid />
       <FooterTable precioFinal={sumaDePrecios()} />
       <ModalAñadirProd show={show} setShow={setShow} />
-    </Container>
+    </ContainerStyled>
     </>
   );
 };

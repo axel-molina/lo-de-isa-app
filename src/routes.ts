@@ -3,4 +3,6 @@ export enum PageRoutes {
     iniciarSesion = "/iniciar-sesion",
     registro = "/registro",
     editarStock = "/editar-stock",
+    addProduct = "/agregar-producto",
+    privacyPolicy = "/politica-privacidad",
 }
