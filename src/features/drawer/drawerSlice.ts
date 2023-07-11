@@ -1,12 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
 const initialState = {
   showDrawer: false,
 };
 export const drawerSlice = createSlice({
-  name: 'drawer',
+  name: "drawer",
   initialState,
   reducers: {
     showDrawer: (state, action: PayloadAction<boolean>) => {
