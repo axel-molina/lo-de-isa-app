@@ -1,40 +1,47 @@
-import { message } from 'antd';
-import { useState } from 'react';
-import { Routes } from '../api/routes_api';
-import { useAppDispatch } from '../app/hooks';
-import { setTokenRedux } from '../features/token/tokenSlice';
-import { API_URL } from '../utils/api_url';
-import { setToken } from '../utils/token';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
+import { Routes } from "../api/routes_api";
+import { useAppDispatch } from "../app/hooks";
+// Redux states
+import { setTokenRedux } from "../features/token/tokenSlice";
+import { setUser } from "../features/userData/userDataSlice";
+// Utils
+import { API_URL } from "../utils/api_url";
+import { setToken } from "../utils/token";
+import { PageRoutes } from "../routes";
+
+interface ILogin {
+  identity: string;
+  password: string;
+}
 
 const useLoginHook = () => {
   const dispatch = useAppDispatch();
-  
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(false);
 
-  const login = async (body:  any) => {
+  const handleLogin = async (body: ILogin) => {
     setIsLoading(true);
-
-    // validar email 
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!emailRegex.test(body.email)) {
-      message.error('El email no tiene un formato válido');
-      setIsLoading(false);
-      return;
-    }
 
     try {
       const response = await fetch(API_URL + Routes.login, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
       const data = await response.json();
-      if(data.token){
+      if (data.token) {
         setToken(data.token);
-        localStorage.setItem('email', body.email);
         dispatch(setTokenRedux(data.token));
+        dispatch(setUser(data.record));
+        navigate(PageRoutes.home);
+      }
+      if (data.code === 400) {
+        message.error("Usuario o contraseña incorrectos");
       }
       setIsLoading(false);
     } catch (error: any) {
@@ -44,7 +51,7 @@ const useLoginHook = () => {
   };
 
   return {
-    login,
+    handleLogin,
     isLoading,
   };
 };

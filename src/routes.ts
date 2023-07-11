@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 export enum PageRoutes {
     venta = "/venta",
-    iniciarSesion = "/iniciar-sesion",
-    registro = "/registro",
-    editarStock = "/editar-stock",
+    login = "/iniciar-sesion",
+    register = "/registro",
+    editStock = "/editar-stock",
     addProduct = "/agregar-producto",
     privacyPolicy = "/politica-privacidad",
+    home = "/inicio",
 }

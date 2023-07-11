@@ -1,65 +1,72 @@
-import { message } from 'antd';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Routes } from '../api/routes_api';
-import { PageRoutes } from '../routes';
-import { API_URL } from '../utils/api_url';
+/* eslint-disable no-unreachable */
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
+import { Routes } from "../api/routes_api";
+import { PageRoutes } from "../routes";
+import { API_URL } from "../utils/api_url";
 
-// TODO: Capturar errores de peticion
+interface IRegister {
+    email: string;
+    emailVisibility: boolean;
+    password: string;
+    passwordConfirm: string;
+    name: string;
+    lastName: string;
+  }
 
 const useRegisterHook = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const register = async (body: any) => {
+  const register = async (body: IRegister) => {
     setIsLoading(true);
 
-    if (body.Password.length < 6) {
-      message.error('La contraseña debe tener al menos 6 caracteres');
+    if (body.password.length < 8) {
+      message.error("La contraseña debe tener al menos 8 caracteres");
       setIsLoading(false);
       return;
     }
 
-    if (body.Password !== body.RePassword) {
-      message.error('Las contraseñas no coinciden');
+    if (body.password !== body.passwordConfirm) {
+      message.error("Las contraseñas no coinciden");
       setIsLoading(false);
       return;
     }
 
-    // validar email
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!emailRegex.test(body.Email)) {
-      message.error('El email no es válido');
+    // validar que el email tenga @
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(body.email)) {
+      message.error("El email no es válido");
       setIsLoading(false);
       return;
     }
 
-    delete body.RePassword;
-    body.Bank = Number(body.Bank);
+    // Añadir emailVisibility = true en body
+    body.emailVisibility = true;
 
     try {
-      const response = await fetch(API_URL + Routes.addUser, {
-        method: 'POST',
+      const response = await fetch(API_URL + Routes.register, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
 
-      if(!response.ok) {
-        message.error('Ya existe un usuario registrado con ese email');
+      if (!response.ok) {
+        message.error("Ya existe un usuario registrado con ese email");
         setIsLoading(false);
         return;
-      } 
+      }
 
-      if (response.status === 201) {
-        message.success('Usuario registrado con éxito');
-        navigate(PageRoutes.iniciarSesion);
+      if (response.status === 200) {
+        message.success("Usuario registrado con éxito");
+        navigate(PageRoutes.login);
       }
 
       setIsLoading(false);
-
     } catch (error: any) {
       setIsLoading(false);
     }

@@ -1,15 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
   ListItemButton,
   ListItemIcon,
   Drawer,
   ListItemText,
   Divider,
-} from '@mui/material';
-import { PowerSettingsNew, Settings } from '@mui/icons-material';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { showDrawer } from '../../features/drawer/drawerSlice';
-import { PageRoutes } from '../../routes';
+} from "@mui/material";
+import { PowerSettingsNew, Settings } from "@mui/icons-material";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { showDrawer } from "../../features/drawer/drawerSlice";
+import { PageRoutes } from "../../routes";
 
 const index = () => {
   const dispatch = useAppDispatch();
@@ -22,13 +22,13 @@ const index = () => {
 
   const closeSession = () => {
     localStorage.clear();
-    navigation(PageRoutes.iniciarSesion); 
+    navigation(PageRoutes.login);
   };
 
   return (
     <div>
-      <Drawer anchor={'bottom'} open={open} onClose={onClose}>
-        <div style={{ padding: '5px 10px' }}>
+      <Drawer anchor={"bottom"} open={open} onClose={onClose}>
+        <div style={{ padding: "5px 10px" }}>
           <ListItemButton>
             <ListItemIcon>
               <Settings />
@@ -38,7 +38,7 @@ const index = () => {
           <Divider />
           <ListItemButton onClick={() => closeSession()}>
             <ListItemIcon>
-              <PowerSettingsNew style={{ color: "red"}}/>
+              <PowerSettingsNew style={{ color: "red" }} />
             </ListItemIcon>
             <ListItemText primary="Cerrar sesión" />
           </ListItemButton>

@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 import {
   List,
   ListItemButton,
   ListItemText,
   ListItemIcon,
   Divider,
-} from '@mui/material';
-import { Add, Edit, History } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
-import { PageRoutes } from '../../../routes';
+} from "@mui/material";
+import { Add, Edit, History } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { PageRoutes } from "../../../routes";
 
 const ListMenu = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const ListMenu = () => {
   return (
     <List
       sx={{
-        marginTop: '30px',
+        marginTop: "30px",
       }}
     >
       <Divider />
@@ -31,7 +31,7 @@ const ListMenu = () => {
         <ListItemText primary="Crear orden de venta" />
       </ListItemButton>
       <Divider />
-      <ListItemButton onClick={() => handleClick(PageRoutes.editarStock)}>
+      <ListItemButton onClick={() => handleClick(PageRoutes.editStock)}>
         <ListItemIcon>
           <Edit />
         </ListItemIcon>

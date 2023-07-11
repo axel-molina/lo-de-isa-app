@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Form, Input, message } from 'antd';
-import { PageRoutes } from '../../../routes';
+import { useNavigate } from "react-router-dom";
+import { Button, Form, Input } from "antd";
+import { PageRoutes } from "../../../routes";
 // Hook
 
 // Styles
@@ -14,16 +13,16 @@ import {
   ContainerMediaInputStyled,
   ContainerMediaLabelStyled,
   ContainerMediaInputPassStyled,
-} from '../styles/FormRegister';
-import useRegisterHook from '../../../hooks/useRegisterHook';
+} from "../styles/FormRegister";
+import useRegisterHook from "../../../hooks/useRegisterHook";
 
 const FormRegister = () => {
   const navigate = useNavigate();
 
-    const { register, isLoading } = useRegisterHook();
+  const { register, isLoading } = useRegisterHook();
 
   const handleReturnToLogin = () => {
-    navigate(PageRoutes.iniciarSesion);
+    navigate(PageRoutes.login);
   };
 
   // Al presionar registrarse
@@ -43,8 +42,8 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Nombre</LabelStyled>
             <Form.Item
-              name="Name"
-              rules={[{ required: true, message: 'Ingrese su nombre' }]}
+              name="name"
+              rules={[{ required: true, message: "Ingrese su nombre" }]}
             >
               <InputStyled placeholder="Nombre" />
             </Form.Item>
@@ -53,7 +52,7 @@ const FormRegister = () => {
           {/* Apellido */}
           <ContainerMediaLabelStyled>
             <LabelStyled>Apellido</LabelStyled>
-            <Form.Item name="Lastname">
+            <Form.Item name="lastName">
               <InputStyled placeholder="Apellido" />
             </Form.Item>
           </ContainerMediaLabelStyled>
@@ -64,8 +63,8 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Email</LabelStyled>
             <Form.Item
-              name="Email"
-              rules={[{ required: true, message: 'Ingrese su email' }]}
+              name="email"
+              rules={[{ required: true, message: "Ingrese su email" }]}
             >
               <InputStyled placeholder="Email" />
             </Form.Item>
@@ -74,7 +73,7 @@ const FormRegister = () => {
           {/* Avatar url */}
           <ContainerMediaLabelStyled>
             <LabelStyled>Avatar (url)</LabelStyled>
-            <Form.Item name="Avatar">
+            <Form.Item name="avatar">
               <InputStyled placeholder="url" type="url" />
             </Form.Item>
           </ContainerMediaLabelStyled>
@@ -93,8 +92,8 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Contraseña</LabelStyled>
             <FormPassStyled
-              name="Password"
-              rules={[{ required: true, message: 'Ingrese su contraseña' }]}
+              name="password"
+              rules={[{ required: true, message: "Ingrese su contraseña" }]}
             >
               <Input.Password placeholder="Contraseña" />
             </FormPassStyled>
@@ -104,45 +103,16 @@ const FormRegister = () => {
           <ContainerMediaLabelStyled>
             <LabelStyled>Reingresar contraseña</LabelStyled>
             <FormPassStyled
-              name="RePassword"
-              rules={[{ required: true, message: 'Ingrese su contraseña' }]}
+              name="passwordConfirm"
+              rules={[{ required: true, message: "Ingrese su contraseña" }]}
             >
               <Input.Password
                 placeholder="Contraseña"
-                style={{ maxWidth: '100%' }}
+                style={{ maxWidth: "100%" }}
               />
             </FormPassStyled>
           </ContainerMediaLabelStyled>
         </ContainerMediaInputPassStyled>
-
-        <ContainerMediaInputStyled>
-          {/* Nombre de tu negocio */}
-          <ContainerMediaLabelStyled>
-            <LabelStyled>Nombre de tu negocio </LabelStyled>
-            <Form.Item
-              name="BusinessName"
-              rules={[{ required: true, message: 'Ingrese su negocio' }]}
-            >
-              <InputStyled placeholder="Nombre de tu negocio" />
-            </Form.Item>
-          </ContainerMediaLabelStyled>
-
-          {/* Dinero actual en cuenta */}
-          <ContainerMediaLabelStyled>
-            <LabelStyled>Dinero actual en cuenta </LabelStyled>
-            <Form.Item
-              name="Bank"
-              rules={[
-                {
-                  required: true,
-                  message: 'Ingrese el dinero actual',
-                },
-              ]}
-            >
-              <InputStyled placeholder="Dinero actual" type="number" />
-            </Form.Item>
-          </ContainerMediaLabelStyled>
-        </ContainerMediaInputStyled>
 
         <ButtonContainersStyled>
           <Button type="primary" htmlType="submit" block loading={isLoading}>

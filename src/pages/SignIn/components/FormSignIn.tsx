@@ -1,113 +1,84 @@
-import { useNavigate } from 'react-router-dom';
-import { Button, Checkbox, Form, Input, message } from 'antd';
-import { PageRoutes } from '../../../routes';
-import useLoginHook from '../../../hooks/useLoginHook';
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import useUserDataHook from '../../../hooks/useUserDataHook';
-import { setUser } from '../../../features/userData/userDataSlice';
+// import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Checkbox, Form, Input } from "antd";
+// Styles
+import {
+  FormStyled,
+  LabelStyled,
+  ButtonsContainerStyled,
+  RememberContainerStyled,
+} from "../styles/FormSignInStyled";
+import { PageRoutes } from "../../../routes";
+// Hooks
+import useLoginHook from "../../../hooks/useLoginHook";
+// import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+// import { setUser } from "../../../features/userData/userDataSlice";
 
 const FormSignIn = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const [userEmail, setUserEmail] = useState("");
-  const { getUserData, userData } = useUserDataHook();
+  // const [userEmail, setUserEmail] = useState("");
 
-  const token = useAppSelector((state) => state.token.value);
+  // const token = useAppSelector((state) => state.token.value);
 
-  const email = 'admin@test.com';
-  const pass = 'admin123';
+  const email = "test@example.com";
+  const pass = "12345678";
 
-  const { login, isLoading } = useLoginHook();
+  // Custom hooks
+  const { handleLogin, isLoading } = useLoginHook();
 
   // Al iniciar sesión
   const onFinish = (values: any) => {
-    setUserEmail(values.email);
-    login(values);
+    handleLogin(values);
   };
 
   // Al registrarse
   const handleRegister = () => {
-    navigate(PageRoutes.registro);
+    navigate(PageRoutes.register);
   };
 
-
-  useEffect(() => {
-    if (token !== "" && userEmail !== "") {
-      getUserData(userEmail);
-    }
-  }, [token]);
-
-  useEffect(() => {
-    if (userData?.id !== "") {
-      message.success(`Bienvenido ${userData?.name}`);
-      dispatch(setUser(userData));
-      navigate("/inicio");
-    }
-  }, [userData]);
-  
-
   return (
-    <Form
+    <FormStyled
       initialValues={{ remember: true }}
       autoComplete="off"
       onFinish={onFinish}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
     >
       <div>
-        <p style={{ margin: 0 }}>Email</p>
+        <LabelStyled>Email</LabelStyled>
         <Form.Item
-          name="email"
-          rules={[{ required: true, message: 'Ingrese su email' }]}
+          name="identity"
+          rules={[{ required: true, message: "Ingrese su email" }]}
           initialValue={email}
         >
           <Input placeholder="Email" />
         </Form.Item>
-        <p style={{ margin: 0 }}>Contraseña</p>
+        <LabelStyled>Contraseña</LabelStyled>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: 'Ingrese su contraseña' }]}
+          rules={[{ required: true, message: "Ingrese su contraseña" }]}
           initialValue={pass}
         >
           <Input.Password placeholder="Contraseña" />
         </Form.Item>
 
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
+        <RememberContainerStyled>
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>Recordarme</Checkbox>
           </Form.Item>
           <Button type="link">Olvidé mi contraseña</Button>
-        </div>
+        </RememberContainerStyled>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: '10px',
-          }}
-        >
+        <ButtonsContainerStyled>
           <Button type="primary" htmlType="submit" block loading={isLoading}>
             Iniciar sesión
           </Button>
           <Button type="default" block onClick={() => handleRegister()}>
             Registrarme
           </Button>
-        </div>
+        </ButtonsContainerStyled>
       </div>
-    </Form>
+    </FormStyled>
   );
 };
 
