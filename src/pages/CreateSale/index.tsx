@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 // Components
-import Header from '../../components/NavBar';
-import DataGrid from './components/DataGrid';
-import Button from '@mui/material/Button';
-import { Add } from '@mui/icons-material';
-import FooterTable from './components/FooterTable';
+import Header from "../../components/NavBar";
+import DataGrid from "./components/DataGrid";
+import Button from "@mui/material/Button";
+import { Add } from "@mui/icons-material";
+import FooterTable from "./components/FooterTable";
 // Interface
-import { IProducts } from '../../models/ProductsModel';
-import ModalAñadirProd from './components/ModalAddProd';
+import { IProducts } from "../../models/ProductsModel";
+import ModalAñadirProd from "./components/ModalAddProd";
 // Redux
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from "../../app/hooks";
 // Styles
-import { ContainerStyled, ContainerButton } from './styles/Styles';
+import { ContainerStyled, ContainerButton } from "./styles/Styles";
 
 const Index = () => {
   const ListaOrdenDeVenta = useAppSelector(
@@ -39,25 +39,25 @@ const Index = () => {
 
   return (
     <>
-    <Header />
-    <ContainerStyled>
-      <ContainerButton>
-        <Button
-          variant="contained"
-          color="success"
-          style={{ paddingLeft: '4px' }}
-          onClick={() => {
-            showModal();
-          }}
-        >
-          <Add />
-          Añadir
-        </Button>
-      </ContainerButton>
-      <DataGrid />
-      <FooterTable precioFinal={sumaDePrecios()} />
-      <ModalAñadirProd show={show} setShow={setShow} />
-    </ContainerStyled>
+      <Header />
+      <ContainerStyled>
+        <ContainerButton>
+          <Button
+            variant="contained"
+            color="success"
+            style={{ paddingLeft: "4px" }}
+            onClick={() => {
+              showModal();
+            }}
+          >
+            <Add />
+            Añadir
+          </Button>
+        </ContainerButton>
+        <DataGrid />
+        <FooterTable precioFinal={sumaDePrecios()} />
+        <ModalAñadirProd show={show} setShow={setShow} />
+      </ContainerStyled>
     </>
   );
 };

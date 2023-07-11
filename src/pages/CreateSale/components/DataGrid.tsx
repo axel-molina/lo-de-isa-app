@@ -1,21 +1,21 @@
-import React from 'react';
-import { Button } from '@mui/material';
-import { Delete, DeleteForever } from '@mui/icons-material';
+import React from "react";
+import { Button } from "@mui/material";
+import { Delete, DeleteForever } from "@mui/icons-material";
 // Interface
-import { IProducts } from '../../../models/ProductsModel';
+import { IProducts } from "../../../models/ProductsModel";
 // Styles
 import {
   HeaderGridStyled,
   ItemContainerStyled,
   ContainerGridStyled,
   InfoStyled,
-} from '../styles/DataGridStyled';
+} from "../styles/DataGridStyled";
 // Redux
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   removeOneProduct,
   removeAllItems,
-} from '../../../features/productsInSalesOrder/productsInSalesOrderSlice';
+} from "../../../features/productsInSalesOrder/productsInSalesOrderSlice";
 
 const DataGrid = () => {
   const dispatch = useAppDispatch();

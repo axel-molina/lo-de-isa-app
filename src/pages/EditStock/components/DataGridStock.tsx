@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Button } from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
-import { IProducts } from '../../../models/ProductsModel';
+import { useState } from "react";
+import { Button } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+import { IProducts } from "../../../models/ProductsModel";
 import {
   ContainerGridStyled,
   HeaderGridStyled,
   InfoStyled,
   ItemContainerStyled,
-} from '../../CreateSale/styles/DataGridStyled';
-import ConfirmationDeleteModal from './ConfirmationDeleteModal';
+} from "../../CreateSale/styles/DataGridStyled";
+import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
 
 const DataGridStock = () => {
   const [show, setShow] = useState(false);
@@ -25,12 +25,12 @@ const DataGridStock = () => {
 
   const products: IProducts[] = [
     {
-      _id: '1',
-      name: 'Producto 1',
+      _id: "1",
+      name: "Producto 1",
       price: 100,
       quantity: 1,
       stock: 10,
-      code: '123456',
+      code: "123456",
     },
   ];
 

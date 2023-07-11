@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ContainerGridStyled = styled.div`
   border: 1px solid #ecf0f1;

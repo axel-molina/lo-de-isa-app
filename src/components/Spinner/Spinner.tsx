@@ -1,12 +1,10 @@
-import { Spin } from 'antd';
-import React from 'react';
+import { Spin } from "antd";
+import React from "react";
 
-const Spinner = () => {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center'}}>
-      <Spin />
-    </div>
-  );
-};
+const Spinner = () => (
+  <div style={{ display: "flex", justifyContent: "center" }}>
+    <Spin />
+  </div>
+);
 
 export default Spinner;

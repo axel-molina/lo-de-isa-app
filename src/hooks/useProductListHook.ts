@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { API_URL } from '../utils/api_url';
-import { Routes } from '../api/routes_api';
-import { getToken } from '../utils/token';
-import { useAppDispatch } from '../app/hooks';
-import { addProducts } from '../features/products/productSlice';
+import { useState } from "react";
+import { API_URL } from "../utils/api_url";
+import { Routes } from "../api/routes_api";
+import { getToken } from "../utils/token";
+import { useAppDispatch } from "../app/hooks";
+import { addProducts } from "../features/products/productSlice";
 
 interface IGetProducts {
   id: string;
@@ -17,10 +17,10 @@ const useProductListHook = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const token = localStorage.getItem('token') || getToken();
+  const token = localStorage.getItem("token") || getToken();
 
   // quitar las comillas del token
-  const tokenWithoutQuotes = token?.replace(/['"]+/g, '');
+  const tokenWithoutQuotes = token?.replace(/['"]+/g, "");
 
   const getProducts = async ({ id, page }: IGetProducts) => {
     setIsLoading(true);
@@ -28,9 +28,9 @@ const useProductListHook = () => {
       const response = await fetch(
         `${API_URL}${Routes.viewProducts}?id=${id}&page=${page}`,
         {
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${tokenWithoutQuotes}`,
           },
         }

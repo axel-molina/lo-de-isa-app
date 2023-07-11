@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IContainerModalStyled {
   show: boolean;
 }
 
 export const ContainerModalStyled = styled.div<IContainerModalStyled>`
-  display: ${(props) => (props.show ? 'flex' : 'none')};
+  display: ${(props) => (props.show ? "flex" : "none")};
   position: fixed;
   z-index: 1;
   left: 0;
@@ -29,12 +29,12 @@ export const ModalStyled = styled.div`
 `;
 
 export const MessageStyled = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 `;
 
 export const ButtonsContainedStyled = styled.div`
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 `;

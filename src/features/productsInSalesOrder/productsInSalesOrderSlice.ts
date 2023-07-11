@@ -1,13 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
-import { IProducts } from '../../models/ProductsModel';
+import { IProducts } from "../../models/ProductsModel";
 
 const initialState: IProducts[] = [];
 
 export const productsInSalesOrderSlice = createSlice({
-  name: 'productsInSalesOrder',
+  name: "productsInSalesOrder",
   initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<IProducts>) => {
@@ -33,13 +32,11 @@ export const productsInSalesOrderSlice = createSlice({
         if (state[productIndex].quantity <= 0) {
           state.splice(productIndex, 1);
         }
-        return;
       }
     },
-    removeAllItems: (state, action: PayloadAction<IProducts>) => {
-      return state.filter((product) => product._id !== action.payload._id);
-    },
+    removeAllItems: (state, action: PayloadAction<IProducts>) => state.filter((product) => product._id !== action.payload._id),
     clearCart: (state, action) => {
+      // eslint-disable-next-line no-unused-expressions
       action.payload;
       return (state = []);
     },

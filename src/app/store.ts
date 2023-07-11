@@ -1,11 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import {
   productsInSalesOrderSlice,
   productSlice,
   userDataSlice,
   drawerSlice,
   tokenSlice,
-} from '../features';
+} from "../features";
 
 export const store = configureStore({
   reducer: {
