@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Edit } from "@mui/icons-material";
 
-export const AvatarContainer = styled.div`
+export const AvatarContainerStyled = styled.div`
   position: relative;
   cursor: pointer;
   border-radius: 50%;

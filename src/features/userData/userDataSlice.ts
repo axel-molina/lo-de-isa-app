@@ -10,7 +10,7 @@ const initialState: IUserData = {
   created: "",
   email: "",
   emailVisibility: false,
-  field: [],
+  avatar: "",
   id: "",
   lastName: "",
   name: "",
@@ -30,7 +30,7 @@ export const userDataSlice = createSlice({
       state.created = action.payload.created;
       state.email = action.payload.email;
       state.emailVisibility = action.payload.emailVisibility;
-      state.field = action.payload.field;
+      state.avatar = action.payload.avatar;
       state.id = action.payload.id;
       state.lastName = action.payload.lastName;
       state.name = action.payload.name;

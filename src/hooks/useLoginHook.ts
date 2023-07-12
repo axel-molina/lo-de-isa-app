@@ -38,6 +38,7 @@ const useLoginHook = () => {
         setToken(data.token);
         dispatch(setTokenRedux(data.token));
         dispatch(setUser(data.record));
+        localStorage.setItem("user", JSON.stringify(data.record));
         navigate(PageRoutes.home);
       }
       if (data.code === 400) {

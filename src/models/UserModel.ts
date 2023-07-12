@@ -5,7 +5,7 @@ export interface IUserData {
     created: string;
     email: string;
     emailVisibility: boolean;
-    field: string[];
+    avatar: string;
     id: string;
     lastName: string;
     name: string;

@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 export enum Routes {
-    viewprofile= "/viewprofile",
-    viewProducts = "/viewProducts",
     viewAvatar = "/viewAvatar",
-    login = "/api/collections/users/auth-with-password",
-    register = "/api/collections/users/records",
     addProduct = "/addProduct",
-    uploadAvatar = "/uploadAvatar",
-    editUser = "/editUser",
-    editProduct = "/editProduct",
-    deleteProduct = "/deleteProduct",
     deleteUser = "/deleteUser",
+    viewprofile= "/api/collections/users/records/",
+    editProduct = "/editProduct",
+    uploadAvatar = "/uploadAvatar",
+    viewProducts = "/viewProducts",
+    deleteProduct = "/deleteProduct",
+    register = "/api/collections/users/records",
+    editUser = "/api/collections/users/records/",
+    login = "/api/collections/users/auth-with-password",
 }
