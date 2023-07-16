@@ -28,7 +28,7 @@ const ConfirmationDeleteModal = ({
         <Button
           color="error"
           variant="contained"
-          onClick={() => console.log(product?._id)}
+          onClick={() => console.log(product?.id)}
         >
           Eliminar
         </Button>

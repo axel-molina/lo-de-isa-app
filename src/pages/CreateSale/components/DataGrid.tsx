@@ -42,11 +42,11 @@ const DataGrid = () => {
         <div>Eliminar todo</div>
       </HeaderGridStyled>
       {productosEnOrdenDeVenta.map((item: IProducts) => (
-        <ItemContainerStyled key={item._id}>
+        <ItemContainerStyled key={item.id}>
           <div>
             <div style={{ display: "flex", gap: "10px" }}>
               <b>{item.name}</b>
-              <InfoStyled>x{item.quantity}</InfoStyled>
+              <InfoStyled>x{item.stock}</InfoStyled>
             </div>
             <InfoStyled>${item.price.toFixed(2)}</InfoStyled>
           </div>

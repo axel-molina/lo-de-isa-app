@@ -12,11 +12,11 @@ export const productsInSalesOrderSlice = createSlice({
     addProduct: (state, action: PayloadAction<IProducts>) => {
       // Si el producto ya existe en el carrito, se aumenta la cantidad
       const productIndex = state.findIndex(
-        (product) => product._id === action.payload._id
+        (product) => product.id === action.payload.id
       );
       if (productIndex !== -1) {
         // modifico la cantidad
-        state[productIndex].quantity += action.payload.quantity;
+        state[productIndex].stock += action.payload.stock;
         return;
       }
       // Si el producto no existe en el carrito, se agrega
@@ -25,16 +25,16 @@ export const productsInSalesOrderSlice = createSlice({
     removeOneProduct: (state, action: PayloadAction<IProducts>) => {
       // Si el producto ya existe en el carrito, se disminuye la cantidad
       const productIndex = state.findIndex(
-        (product) => product._id === action.payload._id
+        (product) => product.id === action.payload.id
       );
       if (productIndex !== -1) {
-        state[productIndex].quantity -= 1;
-        if (state[productIndex].quantity <= 0) {
+        state[productIndex].stock -= 1;
+        if (state[productIndex].stock <= 0) {
           state.splice(productIndex, 1);
         }
       }
     },
-    removeAllItems: (state, action: PayloadAction<IProducts>) => state.filter((product) => product._id !== action.payload._id),
+    removeAllItems: (state, action: PayloadAction<IProducts>) => state.filter((product) => product.id !== action.payload.id),
     clearCart: (state, action) => {
       // eslint-disable-next-line no-unused-expressions
       action.payload;

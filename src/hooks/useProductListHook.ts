@@ -5,15 +5,8 @@ import { getToken } from "../utils/token";
 import { useAppDispatch } from "../app/hooks";
 import { addProducts } from "../features/products/productSlice";
 
-interface IGetProducts {
-  id: string;
-  page: number;
-  limit?: number;
-}
-
 const useProductListHook = () => {
   const dispatch = useAppDispatch();
-  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -22,11 +15,11 @@ const useProductListHook = () => {
   // quitar las comillas del token
   const tokenWithoutQuotes = token?.replace(/['"]+/g, "");
 
-  const getProducts = async ({ id, page }: IGetProducts) => {
+  const getProducts = async (page : number) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${API_URL}${Routes.viewProducts}?id=${id}&page=${page}`,
+        `${API_URL}${Routes.viewProducts}?page=${page}`,
         {
           method: "GET",
           headers: {
@@ -39,8 +32,7 @@ const useProductListHook = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setProducts(data);
-        dispatch(addProducts(data));
+        dispatch(addProducts(data.items));
       }
       setIsLoading(false);
     } catch (error: any) {
@@ -51,7 +43,6 @@ const useProductListHook = () => {
 
   return {
     getProducts,
-    products,
     isLoading,
     error,
   };

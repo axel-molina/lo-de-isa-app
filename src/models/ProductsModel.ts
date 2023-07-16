@@ -1,8 +1,11 @@
 export interface IProducts {
-    _id: string;
+    id: string;
+    collectionId: string;
+    collectionName: string;
+    created: string;
     name: string;
     price: number;
     stock: number;
-    code: string;
-    quantity: number;
-}
+    updated: string;
+    user: string;
+  }

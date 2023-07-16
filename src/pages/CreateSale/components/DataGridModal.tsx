@@ -19,15 +19,15 @@ import { message } from "antd";
 
 const DataGridModal = () => {
   const dispatch = useAppDispatch();
-  const { getProducts, products, isLoading } = useProductListHook();
-  const userData = useAppSelector((state) => state.userData);
+  const { getProducts, isLoading } = useProductListHook();
   const cart = useAppSelector((state) => state.productosEnOrdenDeVenta);
+  const products = useAppSelector((state) => state.products);
   // const email = localStorage.getItem("email");
 
   const noStockAvalible = (item: IProducts) =>
     // Verificar si el item ya existe en el carrito y si la cantidad es igual al stock
-    cart.find((cartItem) => cartItem._id === item._id) &&
-    cart.find((cartItem) => cartItem._id === item._id)?.quantity === item.stock;
+    cart.find((cartItem) => cartItem.id === item.id) &&
+    cart.find((cartItem) => cartItem.id === item.id)?.stock === item.stock;
   const addItem = (item: IProducts) => {
     if (noStockAvalible(item)) {
       message.error("No hay suficiente stock disponible");
@@ -35,8 +35,8 @@ const DataGridModal = () => {
     }
     // hacer una copia del item
     const newItem = { ...item };
-    // agregar la propiedad quantity
-    newItem.quantity = 1;
+    // agregar la propiedad stock
+    newItem.stock = 1;
     // Añadir a redux
     dispatch(addProduct(newItem));
     message.success("Producto añadido");
@@ -45,16 +45,8 @@ const DataGridModal = () => {
   // console.log(products);
 
   useEffect(() => {
-    if (userData.id) {
-      const data = {
-        // id: '000000000000000000000000',
-        id: userData.id,
-        page: 1,
-      };
-
-      getProducts(data);
-    }
-  }, [userData.id]);
+    getProducts(1);
+  }, []);
 
   return (
     <ContainerGridStyled>
@@ -67,7 +59,7 @@ const DataGridModal = () => {
       {products &&
         products.map((item: IProducts) => (
           <ItemContainerStyledModal
-            key={item._id}
+            key={item.id}
             onClick={() => addItem(item)}
           >
             <div>{item?.name}</div>

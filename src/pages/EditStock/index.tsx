@@ -1,20 +1,18 @@
-import React from "react";
-// import { useState, useEffect } from 'react';
+import React, { useState } from "react";
 // Components
 import Header from "../../components/NavBar";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import DataGridStock from "./components/DataGridStock";
-// Interface
-// import { IProducts } from '../../models/ProductsModel';
-// Redux
-// import { useAppSelector } from '../../app/hooks';
 // Styles
 import { ContainerStyled, ContainerButton } from "../CreateSale/styles/Styles";
+import ModalAddNewProduct from "./components/ModalAddNewProduct";
 
 const index = () => {
-  const handleAddProduct = () => {
-    // console.log('Añadir producto');
+  const [show, setShow] = useState(false);
+
+  const showModal = () => {
+    setShow(true);
   };
 
   return (
@@ -27,7 +25,7 @@ const index = () => {
             color="success"
             style={{ paddingLeft: "4px" }}
             onClick={() => {
-              handleAddProduct();
+              showModal();
             }}
           >
             <Add />
@@ -36,6 +34,8 @@ const index = () => {
         </ContainerButton>
         <DataGridStock />
       </ContainerStyled>
+      {/* Modal agregar producto nuevo */}
+      <ModalAddNewProduct show={show} setShow={setShow} />
     </div>
   );
 };

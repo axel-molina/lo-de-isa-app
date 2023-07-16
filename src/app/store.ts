@@ -10,7 +10,7 @@ import {
 export const store = configureStore({
   reducer: {
     productosEnOrdenDeVenta: productsInSalesOrderSlice,
-    productos: productSlice,
+    products: productSlice,
     userData: userDataSlice,
     drawer: drawerSlice,
     token: tokenSlice,
