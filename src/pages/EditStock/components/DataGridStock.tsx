@@ -12,13 +12,15 @@ import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
 import { useAppSelector } from "../../../app/hooks";
 import useProductListHook from "../../../hooks/useProductListHook";
 
-const DataGridStock = () => {
+interface IDataGrid {
+  refresh: boolean;
+}
+
+const DataGridStock = ({ refresh }: IDataGrid) => {
   const [show, setShow] = useState(false);
   const products = useAppSelector((state) => state.products);
   const [product, setProduct] = useState<IProducts | null>(null);
   const { getProducts } = useProductListHook();
-
-  console.log(products);
 
   const deleteProduct = (item: IProducts) => {
     console.log("eliminar producto", item);
@@ -32,7 +34,7 @@ const DataGridStock = () => {
 
   useEffect(() => {
     getProducts(1);
-  }, []);
+  }, [refresh]);
 
   return (
     <ContainerGridStyled>

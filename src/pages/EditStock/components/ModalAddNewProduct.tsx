@@ -9,12 +9,14 @@ import useModalNewProductsHook from "../hooks/useModalNewProductsHook";
 interface IModal {
   show: boolean;
   setShow: (show: boolean) => void;
+  setRefresh: (refresh: boolean) => void;
+  refresh: boolean;
 }
 
-const ModalAddNewProduct = ({ show, setShow }: IModal) => {
+const ModalAddNewProduct = ({ show, setShow, setRefresh, refresh }: IModal) => {
   // Custom hook
-  const { handleAddNewProduct, handleInputChange, error } =
-    useModalNewProductsHook();
+  const { handleAddNewProduct, handleInputChange, error, data } =
+    useModalNewProductsHook(setRefresh, refresh);
 
   return (
     <Modal
@@ -27,6 +29,7 @@ const ModalAddNewProduct = ({ show, setShow }: IModal) => {
       <Input
         placeholder="Nombre del producto"
         name="name"
+        value={data.name}
         onChange={(e) => handleInputChange(e)}
       />
       <LabelStyled>Precio</LabelStyled>
@@ -34,6 +37,7 @@ const ModalAddNewProduct = ({ show, setShow }: IModal) => {
         type="number"
         placeholder="Precio"
         name="price"
+        value={data.price}
         onChange={(e) => handleInputChange(e)}
       />
       <LabelStyled>Stock</LabelStyled>
@@ -41,12 +45,14 @@ const ModalAddNewProduct = ({ show, setShow }: IModal) => {
         type="number"
         placeholder="Stock"
         name="stock"
+        value={data.stock}
         onChange={(e) => handleInputChange(e)}
       />
       <LabelStyled>Código</LabelStyled>
       <Input
         placeholder="Código"
         name="code"
+        value={data.code}
         onChange={(e) => handleInputChange(e)}
       />
       <p style={{ color: "red" }}>{error}</p>

@@ -10,6 +10,7 @@ import ModalAddNewProduct from "./components/ModalAddNewProduct";
 
 const index = () => {
   const [show, setShow] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const showModal = () => {
     setShow(true);
@@ -32,10 +33,15 @@ const index = () => {
             Añadir producto
           </Button>
         </ContainerButton>
-        <DataGridStock />
+        <DataGridStock refresh={refresh} />
       </ContainerStyled>
       {/* Modal agregar producto nuevo */}
-      <ModalAddNewProduct show={show} setShow={setShow} />
+      <ModalAddNewProduct
+        show={show}
+        setShow={setShow}
+        refresh={refresh}
+        setRefresh={setRefresh}
+      />
     </div>
   );
 };

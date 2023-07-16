@@ -12,7 +12,7 @@ interface IData {
     code: string;
 }
 
-const useModalNewProductsHook = () => {
+const useModalNewProductsHook = (setRefresh: (value: boolean) => void, refresh: boolean) => {
   const token = localStorage.getItem("token") || getToken();
   const userId = useAppSelector((state) => state.userData.id);
   const tokenWithoutQuotes = token?.replace(/['"]+/g, "");
@@ -57,18 +57,27 @@ const useModalNewProductsHook = () => {
         },
         body: JSON.stringify(body),
       });
-      const data = await response.json();
-      if (data.code === 200) {
+
+      if (response.status === 200) {
         message.success("Producto agregado correctamente");
+        // refrescar tabla
+        setRefresh(!refresh);
+        // limpiar campos
+        setData({
+          name: "",
+          price: "",
+          stock: "",
+          code: "",
+        });
       }
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
     }
   };
 
   return {
+    data,
     error,
     isLoading,
     handleInputChange,

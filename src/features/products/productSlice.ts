@@ -10,7 +10,7 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     addProducts: (state, action: PayloadAction<IProducts[]>) =>
-      [...state, ...action.payload],
+      action.payload,
     removeProduct: (state, action: PayloadAction<IProducts>) =>
       state.filter((product: any) => product.id !== action.payload.id),
   },
