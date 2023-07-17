@@ -5,6 +5,7 @@ export interface IProducts {
     created: string;
     name: string;
     price: number;
+    code: string;
     stock: number;
     updated: string;
     user: string;

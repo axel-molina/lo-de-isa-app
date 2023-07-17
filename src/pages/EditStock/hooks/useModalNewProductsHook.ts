@@ -7,8 +7,8 @@ import { message } from "antd";
 
 interface IData {
     name: string;
-    price: string;
-    stock: string;
+    price: number;
+    stock: number;
     code: string;
 }
 
@@ -20,8 +20,8 @@ const useModalNewProductsHook = (setRefresh: (value: boolean) => void, refresh: 
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     name: "",
-    price: "",
-    stock: "",
+    price: 0,
+    stock: 0,
     code: "",
   });
 
@@ -34,8 +34,8 @@ const useModalNewProductsHook = (setRefresh: (value: boolean) => void, refresh: 
 
   const handleAddNewProduct = () => {
     setError("");
-    if (data.name === "" || data.price === "" || data.stock === "") {
-      setError("Completa los campos para continuar");
+    if (data.name === "") {
+      setError("Debes completar los campos para continuar");
       return;
     }
     postNewProduct(data);
@@ -65,8 +65,8 @@ const useModalNewProductsHook = (setRefresh: (value: boolean) => void, refresh: 
         // limpiar campos
         setData({
           name: "",
-          price: "",
-          stock: "",
+          price: 0,
+          stock: 0,
           code: "",
         });
       }

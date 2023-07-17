@@ -11,6 +11,7 @@ import {
 import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
 import { useAppSelector } from "../../../app/hooks";
 import useProductListHook from "../../../hooks/useProductListHook";
+import EditProductModal from "./EditProductModal";
 
 interface IDataGrid {
   refresh: boolean;
@@ -19,12 +20,14 @@ interface IDataGrid {
 
 const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
   const [show, setShow] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const products = useAppSelector((state) => state.products);
   const [product, setProduct] = useState<IProducts>({
     id: "",
     name: "",
     stock: 0,
     price: 0,
+    code: "",
     user: "",
     updated: "",
     collectionId: "",
@@ -39,7 +42,8 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
   };
 
   const editProduct = (item: IProducts) => {
-    console.log("editar", item);
+    setProduct(item);
+    setShowEditModal(true);
   };
 
   useEffect(() => {
@@ -76,10 +80,19 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
           </div>
         </ItemContainerStyled>
       ))}
+      {/* Modal confirmación de eliminación */}
       <ConfirmationDeleteModal
         product={product}
         show={show}
         setShow={setShow}
+        refresh={refresh}
+        setRefresh={setRefresh}
+      />
+      {/* Modal editar producto */}
+      <EditProductModal
+        product={product}
+        show={showEditModal}
+        setShow={setShowEditModal}
         refresh={refresh}
         setRefresh={setRefresh}
       />

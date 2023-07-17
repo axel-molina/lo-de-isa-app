@@ -13,7 +13,7 @@ interface IModal {
   refresh: boolean;
 }
 
-const ModalAddNewProduct = ({ show, setShow, setRefresh, refresh }: IModal) => {
+const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
   // Custom hook
   const { handleAddNewProduct, handleInputChange, error, data } =
     useModalNewProductsHook(setRefresh, refresh);
@@ -22,6 +22,7 @@ const ModalAddNewProduct = ({ show, setShow, setRefresh, refresh }: IModal) => {
     <Modal
       title="Añadir producto nuevo"
       open={show}
+      onCancel={() => setShow(false)}
       footer={[
         <div
           style={{ display: "flex", gap: "5px", justifyContent: "flex-end" }}
@@ -68,4 +69,4 @@ const ModalAddNewProduct = ({ show, setShow, setRefresh, refresh }: IModal) => {
   );
 };
 
-export default ModalAddNewProduct;
+export default AddNewProductModal;

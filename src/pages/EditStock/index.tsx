@@ -6,7 +6,7 @@ import { Add } from "@mui/icons-material";
 import DataGridStock from "./components/DataGridStock";
 // Styles
 import { ContainerStyled, ContainerButton } from "../CreateSale/styles/Styles";
-import ModalAddNewProduct from "./components/ModalAddNewProduct";
+import ModalAddNewProduct from "./components/AddNewProductModal";
 
 const index = () => {
   const [show, setShow] = useState(false);
