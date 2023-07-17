@@ -16,7 +16,7 @@ const useProfileDataHooks = () => {
   const getProfileData = async () => {
     setIsLoadingProfileData(true);
     try {
-      const response = await fetch(API_URL + Routes.viewprofile + idUser, {
+      const response = await fetch(API_URL + Routes.user + idUser, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

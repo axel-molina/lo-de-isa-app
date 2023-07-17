@@ -14,16 +14,26 @@ import useProductListHook from "../../../hooks/useProductListHook";
 
 interface IDataGrid {
   refresh: boolean;
+  setRefresh: (value: boolean) => void;
 }
 
-const DataGridStock = ({ refresh }: IDataGrid) => {
+const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
   const [show, setShow] = useState(false);
   const products = useAppSelector((state) => state.products);
-  const [product, setProduct] = useState<IProducts | null>(null);
+  const [product, setProduct] = useState<IProducts>({
+    id: "",
+    name: "",
+    stock: 0,
+    price: 0,
+    user: "",
+    updated: "",
+    collectionId: "",
+    collectionName: "",
+    created: "",
+  });
   const { getProducts } = useProductListHook();
 
   const deleteProduct = (item: IProducts) => {
-    console.log("eliminar producto", item);
     setProduct(item);
     setShow(true);
   };
@@ -70,6 +80,8 @@ const DataGridStock = ({ refresh }: IDataGrid) => {
         product={product}
         show={show}
         setShow={setShow}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
     </ContainerGridStyled>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 // Components
-import { Input, Modal } from "antd";
+import { Input, Modal, Button } from "antd";
 // Styles
 import { LabelStyled } from "../../SignIn/styles/FormSignInStyled";
 // Hooks
@@ -22,8 +22,16 @@ const ModalAddNewProduct = ({ show, setShow, setRefresh, refresh }: IModal) => {
     <Modal
       title="Añadir producto nuevo"
       open={show}
-      onCancel={() => setShow(false)}
-      onOk={handleAddNewProduct}
+      footer={[
+        <div
+          style={{ display: "flex", gap: "5px", justifyContent: "flex-end" }}
+        >
+          <Button onClick={() => setShow(false)}>Cancelar</Button>
+          <Button type="primary" onClick={handleAddNewProduct}>
+            Añadir
+          </Button>
+        </div>,
+      ]}
     >
       <LabelStyled>Nombre del producto</LabelStyled>
       <Input

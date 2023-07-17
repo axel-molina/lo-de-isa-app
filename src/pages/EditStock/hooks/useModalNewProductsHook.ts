@@ -49,7 +49,7 @@ const useModalNewProductsHook = (setRefresh: (value: boolean) => void, refresh: 
     };
     setIsLoading(true);
     try {
-      const response = await fetch(API_URL + Routes.addProduct, {
+      const response = await fetch(API_URL + Routes.products, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

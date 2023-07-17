@@ -19,7 +19,7 @@ const useProductListHook = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${API_URL}${Routes.viewProducts}?page=${page}`,
+        `${API_URL}${Routes.products}?page=${page}`,
         {
           method: "GET",
           headers: {

@@ -4,11 +4,7 @@ export enum Routes {
     deleteUser = "/deleteUser",
     editProduct = "/editProduct",
     uploadAvatar = "/uploadAvatar",
-    deleteProduct = "/deleteProduct",
-    register = "/api/collections/users/records",
-    editUser = "/api/collections/users/records/",
-    viewprofile= "/api/collections/users/records/",
-    addProduct = "/api/collections/products/records",
-    viewProducts = "/api/collections/products/records",
+    products = "/api/collections/products/records",
+    user = "/api/collections/users/records",
     login = "/api/collections/users/auth-with-password",
 }

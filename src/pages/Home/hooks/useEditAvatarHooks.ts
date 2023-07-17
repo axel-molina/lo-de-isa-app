@@ -19,7 +19,7 @@ const useEditAvatarHooks = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_URL + Routes.editUser}${idUser}`, {
+      const response = await fetch(`${API_URL + Routes.user}${idUser}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

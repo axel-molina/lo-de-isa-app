@@ -1,47 +1,59 @@
+/* eslint-disable multiline-ternary */
 import React from "react";
-import { Button } from "@mui/material";
 import { IProducts } from "../../../models/ProductsModel";
-import {
-  ContainerModalStyled,
-  ModalStyled,
-  MessageStyled,
-  ButtonsContainedStyled,
-} from "../styles/ConfirmationDeleteStyled";
+import { Modal, Button } from "antd";
+import useDeleteProductHook from "../hooks/useDeleteProductHook";
+import Spinner from "../../../components/Spinner/Spinner";
 
 interface IConfirmationDeleteModal {
   show: boolean;
   setShow: (value: boolean) => void;
-  product: IProducts | null;
+  product: IProducts;
+  refresh: boolean;
+  setRefresh: (value: boolean) => void;
 }
 
 const ConfirmationDeleteModal = ({
   show,
   setShow,
   product,
-}: IConfirmationDeleteModal) => (
-  <ContainerModalStyled show={show}>
-    <ModalStyled>
-      <MessageStyled>
-        ¿Quieres eliminar <b> {product?.name}</b>?
-      </MessageStyled>
-      <ButtonsContainedStyled>
-        <Button
-          color="error"
-          variant="contained"
-          onClick={() => console.log(product?.id)}
+  refresh,
+  setRefresh,
+}: IConfirmationDeleteModal) => {
+  const { handleDeleteProduct, isLoading } = useDeleteProductHook(
+    refresh,
+    setRefresh,
+    setShow
+  );
+
+  return (
+    <Modal
+      title="Eliminar artículo"
+      open={show}
+      onCancel={() => setShow(false)}
+      onOk={() => setShow(false)}
+      footer={[
+        <div
+          style={{ display: "flex", gap: "5px", justifyContent: "flex-end" }}
         >
-          Eliminar
-        </Button>
-        <Button
-          color="success"
-          variant="contained"
-          onClick={() => setShow(false)}
-        >
-          Cancelar
-        </Button>
-      </ButtonsContainedStyled>
-    </ModalStyled>
-  </ContainerModalStyled>
-);
+          <Button onClick={() => setShow(false)}>Cancelar</Button>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Button
+              type="primary"
+              danger
+              onClick={() => handleDeleteProduct(product.id)}
+            >
+              Eliminar
+            </Button>
+          )}
+        </div>,
+      ]}
+    >
+      <p>¿Quieres eliminar {product?.name}?</p>
+    </Modal>
+  );
+};
 
 export default ConfirmationDeleteModal;

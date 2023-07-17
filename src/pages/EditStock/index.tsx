@@ -33,7 +33,7 @@ const index = () => {
             Añadir producto
           </Button>
         </ContainerButton>
-        <DataGridStock refresh={refresh} />
+        <DataGridStock refresh={refresh} setRefresh={setRefresh} />
       </ContainerStyled>
       {/* Modal agregar producto nuevo */}
       <ModalAddNewProduct

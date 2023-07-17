@@ -47,7 +47,7 @@ const useRegisterHook = () => {
     body.emailVisibility = true;
 
     try {
-      const response = await fetch(API_URL + Routes.register, {
+      const response = await fetch(API_URL + Routes.user, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
