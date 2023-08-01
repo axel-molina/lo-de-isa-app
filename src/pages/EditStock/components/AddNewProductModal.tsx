@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React from "react";
 // Components
 import { Input, Modal, Button } from "antd";
@@ -5,6 +6,7 @@ import { Input, Modal, Button } from "antd";
 import { LabelStyled } from "../../SignIn/styles/FormSignInStyled";
 // Hooks
 import useModalNewProductsHook from "../hooks/useModalNewProductsHook";
+import Spinner from "../../../components/Spinner/Spinner";
 
 interface IModal {
   show: boolean;
@@ -15,7 +17,7 @@ interface IModal {
 
 const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
   // Custom hook
-  const { handleAddNewProduct, handleInputChange, error, data } =
+  const { handleAddNewProduct, handleInputChange, error, data, isLoading } =
     useModalNewProductsHook(setRefresh, refresh);
 
   return (
@@ -28,9 +30,13 @@ const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
           style={{ display: "flex", gap: "5px", justifyContent: "flex-end" }}
         >
           <Button onClick={() => setShow(false)}>Cancelar</Button>
-          <Button type="primary" onClick={handleAddNewProduct}>
-            Añadir
-          </Button>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Button type="primary" onClick={handleAddNewProduct}>
+              Añadir
+            </Button>
+          )}
         </div>,
       ]}
     >

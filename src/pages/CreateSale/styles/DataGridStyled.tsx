@@ -3,12 +3,7 @@ import styled from "styled-components";
 export const ContainerGridStyled = styled.div`
   border: 1px solid #ecf0f1;
   border-radius: 5px;
-  height: 65vh;
   overflow-y: scroll;
-
-  @media (max-width: 480px) {
-    height: 50vh;
-  }
 `;
 
 export const HeaderGridStyled = styled.div`

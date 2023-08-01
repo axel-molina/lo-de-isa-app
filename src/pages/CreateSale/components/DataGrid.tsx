@@ -59,7 +59,7 @@ const DataGrid = () => {
               <Delete />
             </Button>
           </div>
-          <div style={{}}>
+          <div style={{ marginLeft: "15px" }}>
             <Button
               variant="contained"
               color="error"

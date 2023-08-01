@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
@@ -12,6 +13,7 @@ import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
 import { useAppSelector } from "../../../app/hooks";
 import useProductListHook from "../../../hooks/useProductListHook";
 import EditProductModal from "./EditProductModal";
+import Spinner from "../../../components/Spinner/Spinner";
 
 interface IDataGrid {
   refresh: boolean;
@@ -34,7 +36,7 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
     collectionName: "",
     created: "",
   });
-  const { getProducts } = useProductListHook();
+  const { getProducts, isLoading } = useProductListHook();
 
   const deleteProduct = (item: IProducts) => {
     setProduct(item);
@@ -57,29 +59,37 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
         <div>Editar</div>
         <div>Eliminar</div>
       </HeaderGridStyled>
-      {products.map((product: IProducts) => (
-        <ItemContainerStyled key={product.id}>
-          <div>
-            <b>{product.name}</b>
-            <InfoStyled>Stock: {product.stock}</InfoStyled>
-            <InfoStyled>${product.price.toFixed(2)}</InfoStyled>
-          </div>
-          <div style={{}}>
-            <Button variant="outlined" onClick={() => editProduct(product)}>
-              <Edit />
-            </Button>
-          </div>
-          <div style={{}}>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => deleteProduct(product)}
-            >
-              <Delete />
-            </Button>
-          </div>
-        </ItemContainerStyled>
-      ))}
+      {isLoading ? (
+        <div style={{ margin: "60px auto" }}>
+          <Spinner />
+        </div>
+      ) : (
+        <div>
+          {products.map((product: IProducts) => (
+            <ItemContainerStyled key={product.id}>
+              <div>
+                <b>{product.name}</b>
+                <InfoStyled>Stock: {product.stock}</InfoStyled>
+                <InfoStyled>${product.price.toFixed(2)}</InfoStyled>
+              </div>
+              <div style={{}}>
+                <Button variant="outlined" onClick={() => editProduct(product)}>
+                  <Edit />
+                </Button>
+              </div>
+              <div style={{}}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => deleteProduct(product)}
+                >
+                  <Delete />
+                </Button>
+              </div>
+            </ItemContainerStyled>
+          ))}
+        </div>
+      )}
       {/* Modal confirmación de eliminación */}
       <ConfirmationDeleteModal
         product={product}

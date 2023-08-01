@@ -22,8 +22,8 @@ const FormSignIn = () => {
 
   // const token = useAppSelector((state) => state.token.value);
 
-  const email = "test@example.com";
-  const pass = "12345678";
+  const email = "molinaaxel338@gmail.com";
+  const pass = "Ivanmln99*";
 
   // Custom hooks
   const { handleLogin, isLoading } = useLoginHook();

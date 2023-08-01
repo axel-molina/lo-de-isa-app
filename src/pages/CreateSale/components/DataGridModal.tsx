@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // Interface
 import { IProducts } from "../../../models/ProductsModel";
 // Styles
@@ -16,9 +17,11 @@ import useProductListHook from "../../../hooks/useProductListHook";
 import { Button } from "@mui/material";
 // import Spinner from "../../../components/Spinner/Spinner";
 import { message } from "antd";
+import { PageRoutes } from "../../../routes";
 
 const DataGridModal = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { getProducts, isLoading } = useProductListHook();
   const cart = useAppSelector((state) => state.productosEnOrdenDeVenta);
   const products = useAppSelector((state) => state.products);
@@ -58,10 +61,7 @@ const DataGridModal = () => {
       </HeaderGridStyledModal>
       {products &&
         products.map((item: IProducts) => (
-          <ItemContainerStyledModal
-            key={item.id}
-            onClick={() => addItem(item)}
-          >
+          <ItemContainerStyledModal key={item.id} onClick={() => addItem(item)}>
             <div>{item?.name}</div>
             <div style={{ marginLeft: "25%" }}>${item?.price?.toFixed(2)}</div>
             <div style={{ marginLeft: "48%" }}>{item?.stock}</div>
@@ -80,7 +80,11 @@ const DataGridModal = () => {
           <p style={{ textAlign: "center" }}>
             Aún no hay productos en tu lista
           </p>
-          <Button color="success" variant="contained">
+          <Button
+            color="success"
+            variant="contained"
+            onClick={() => navigate(PageRoutes.editStock)}
+          >
             Agregar productos
           </Button>
         </div>
