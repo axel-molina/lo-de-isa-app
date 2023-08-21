@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { Routes } from "../api/routes_api";
 import { PageRoutes } from "../routes";
-import { API_URL } from "../utils/api_url";
+import { API_URL } from "../services/api_url";
 
 interface IRegister {
     email: string;

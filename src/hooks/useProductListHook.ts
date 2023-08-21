@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { API_URL } from "../utils/api_url";
+import { API_URL } from "../services/api_url";
 import { Routes } from "../api/routes_api";
 import { getToken } from "../utils/token";
 import { useAppDispatch } from "../app/hooks";

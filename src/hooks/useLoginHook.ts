@@ -7,7 +7,7 @@ import { useAppDispatch } from "../app/hooks";
 import { setTokenRedux } from "../features/token/tokenSlice";
 import { setUser } from "../features/userData/userDataSlice";
 // Utils
-import { API_URL } from "../utils/api_url";
+import { API_URL } from "../services/api_url";
 import { setToken } from "../utils/token";
 import { PageRoutes } from "../routes";
 

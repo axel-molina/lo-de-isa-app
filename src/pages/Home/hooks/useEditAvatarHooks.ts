@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { message } from "antd";
-import { API_URL } from "../../../utils/api_url";
+import { API_URL } from "../../../services/api_url";
 import { Routes } from "../../../api/routes_api";
 import { setUser } from "../../../features/userData/userDataSlice";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Routes } from "../../../api/routes_api";
-import { API_URL } from "../../../utils/api_url";
+import { API_URL } from "../../../services/api_url";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { setUser } from "../../../features/userData/userDataSlice";
 

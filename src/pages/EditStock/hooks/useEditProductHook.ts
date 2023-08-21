@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { IProducts } from "../../../models/ProductsModel";
-import { Routes } from "../../../api/routes_api";
-import { API_URL } from "../../../utils/api_url";
-import { message } from "antd";
+import useHttpEditProduct from "../../../services/products/useHttpEditProduct";
 
 const useEditProductHook = (
   product: IProducts,
@@ -11,9 +9,9 @@ const useEditProductHook = (
   refresh: boolean,
   setRefresh: (value: boolean) => void
 ) => {
+  const { editAsyncProduct, isLoadingEdit } = useHttpEditProduct();
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const token = localStorage.getItem("token");
+
   // setear el producto a editar
   const [productEdit, setProductEdit] = useState({
     name: "",
@@ -22,44 +20,12 @@ const useEditProductHook = (
     code: "",
     user: "",
   });
-  // Agregar Bearer al token y quitarle las comillas
-  const tokenBearer = `Bearer ${token?.slice(1, -1)}`;
 
   const handleEditProduct = () => {
     setError("");
     if (validateFields()) {
-      editProduct();
+      editAsyncProduct(product.id, productEdit, setShow, setRefresh, refresh);
     }
-  };
-
-  const editProduct = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `${API_URL + Routes.products}/${product.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Autorization: tokenBearer,
-          },
-          body: JSON.stringify(productEdit),
-        }
-      );
-
-      if (response.status === 200) {
-        message.success("Producto editado con éxito");
-        // cerrar modal
-        setShow(false);
-        // actualizar lista de productos
-        setRefresh(!refresh);
-      } else {
-        message.error("Error al editar el producto");
-      }
-    } catch (error) {
-      message.error("Error al editar el producto");
-    }
-    setIsLoading(false);
   };
 
   // validar que los campos no esten vacios
@@ -92,7 +58,7 @@ const useEditProductHook = (
   return {
     error,
     productEdit,
-    isLoading,
+    isLoadingEdit,
     handleEditProduct,
     handleInputChange,
   };
