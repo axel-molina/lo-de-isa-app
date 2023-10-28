@@ -1,15 +1,10 @@
 export interface IUserData {
-    bank: number;
-    collectionId: string;
-    collectionName: string;
-    created: string;
-    email: string;
-    emailVisibility: boolean;
-    avatar: string;
-    id: string;
-    lastName: string;
-    name: string;
-    updated: string;
-    username: string;
-    verified: boolean;
-  }
+  _id: string;
+  bank: number;
+  email: string;
+  avatar: string;
+  name: string;
+  lastName: string;
+  createdAt: string;
+  updatedAt: string;
+}

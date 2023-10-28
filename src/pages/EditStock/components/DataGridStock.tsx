@@ -10,8 +10,8 @@ import {
   ItemContainerStyled,
 } from "../../CreateSale/styles/DataGridStyled";
 import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
-import { useAppSelector } from "../../../app/hooks";
-import useProductListHook from "../../../hooks/useProductListHook";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import useHttpGetProducts from "../../../services/products/useHttpGetProducts";
 import EditProductModal from "./EditProductModal";
 import Spinner from "../../../components/Spinner/Spinner";
 
@@ -21,6 +21,10 @@ interface IDataGrid {
 }
 
 const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
+  const { httpGetProductsAsync } = useHttpGetProducts();
+
+  const dispatch = useAppDispatch();
+
   const [show, setShow] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const products = useAppSelector((state) => state.products);
@@ -36,7 +40,10 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
     collectionName: "",
     created: "",
   });
-  const { getProducts, isLoading } = useProductListHook();
+
+  const isLoading = useAppSelector(
+    (state) => state.loadingProduct.isLoadingProducts
+  );
 
   const deleteProduct = (item: IProducts) => {
     setProduct(item);
@@ -49,7 +56,7 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
   };
 
   useEffect(() => {
-    getProducts(1);
+    dispatch(httpGetProductsAsync(1, 10, ""));
   }, [refresh]);
 
   return (

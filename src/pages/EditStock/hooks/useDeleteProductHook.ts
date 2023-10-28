@@ -16,7 +16,7 @@ const useDeleteProductHook = (
   const handleDeleteProduct = async (idProduct: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL + Routes.products}/${idProduct}`, {
+      const response = await fetch(`${API_URL + Routes.GET_PRODUCT_BY_ID}/${idProduct}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import { useAppSelector } from "../../../app/hooks";
 import { message } from "antd";
 import { API_URL } from "../../../services/api_url";
 import { Routes } from "../../../api/routes_api";
-import { setUser } from "../../../features/userData/userDataSlice";
 
 const useEditAvatarHooks = () => {
-  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const idUser = useAppSelector((state) => state.userData.id);
+  const idUser = useAppSelector((state) => state.userData._id);
   const token = localStorage.getItem("token");
 
   // Agregar Bearer al token y quitarle las comillas
@@ -18,7 +16,7 @@ const useEditAvatarHooks = () => {
   const editAvatar = async (body: any) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL + Routes.user}/${idUser}`, {
+      const response = await fetch(`${API_URL + Routes.USER}/${idUser}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

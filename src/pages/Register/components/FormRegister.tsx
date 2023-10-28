@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
-import { PageRoutes } from "../../../routes";
 // Hook
-
+import { useAppSelector } from "../../../app/hooks";
 // Styles
 import {
   InputStyled,
@@ -17,13 +15,11 @@ import {
 import useRegisterHook from "../../../hooks/useRegisterHook";
 
 const FormRegister = () => {
-  const navigate = useNavigate();
+  const { register, handleReturnToLogin } = useRegisterHook();
 
-  const { register, isLoading } = useRegisterHook();
-
-  const handleReturnToLogin = () => {
-    navigate(PageRoutes.login);
-  };
+  const isLoading = useAppSelector(
+    (state) => state.loadingAuth.isLoadingRegister
+  );
 
   // Al presionar registrarse
   const handleRegister = (values: any) => {
@@ -77,14 +73,6 @@ const FormRegister = () => {
               <InputStyled placeholder="url" type="url" />
             </Form.Item>
           </ContainerMediaLabelStyled>
-
-          {/* Numero de contacto */}
-          {/* <ContainerMediaLabelStyled>
-            <LabelStyled>Número de teléfono</LabelStyled>
-            <Form.Item name="number">
-              <Input placeholder="Número de teléfono" type="tel" />
-            </Form.Item>
-          </ContainerMediaLabelStyled> */}
         </ContainerMediaInputStyled>
 
         <ContainerMediaInputPassStyled>
@@ -115,11 +103,11 @@ const FormRegister = () => {
         </ContainerMediaInputPassStyled>
 
         <ButtonContainersStyled>
-          <Button type="primary" htmlType="submit" block loading={isLoading}>
-            Registrarme
-          </Button>
           <Button type="default" block onClick={() => handleReturnToLogin()}>
             Ya tengo cuenta
+          </Button>
+          <Button type="primary" htmlType="submit" block loading={isLoading}>
+            Registrarme
           </Button>
         </ButtonContainersStyled>
       </div>

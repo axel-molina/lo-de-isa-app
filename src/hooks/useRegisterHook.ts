@@ -1,37 +1,36 @@
-/* eslint-disable no-unreachable */
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-import { Routes } from "../api/routes_api";
+import { useAppDispatch } from "../app/hooks";
+import useHttpRegister from "../services/auth/useHttpRegister";
+import { useNavigate } from "react-router-dom";
 import { PageRoutes } from "../routes";
-import { API_URL } from "../services/api_url";
 
 interface IRegister {
-    email: string;
-    emailVisibility: boolean;
-    password: string;
-    passwordConfirm: string;
-    name: string;
-    lastName: string;
-  }
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  name: string;
+  lastname: string;
+  avatar: string;
+}
 
 const useRegisterHook = () => {
+  const { httpRegisterAsync } = useHttpRegister();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const handleReturnToLogin = () => {
+    navigate(PageRoutes.login);
+  };
 
   const register = async (body: IRegister) => {
-    setIsLoading(true);
-
     if (body.password.length < 8) {
       message.error("La contraseña debe tener al menos 8 caracteres");
-      setIsLoading(false);
       return;
     }
 
-    if (body.password !== body.passwordConfirm) {
+    const { passwordConfirm, ...newBody } = body;
+    if (body.password !== passwordConfirm) {
       message.error("Las contraseñas no coinciden");
-      setIsLoading(false);
       return;
     }
 
@@ -39,42 +38,15 @@ const useRegisterHook = () => {
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(body.email)) {
       message.error("El email no es válido");
-      setIsLoading(false);
       return;
     }
 
-    // Añadir emailVisibility = true en body
-    body.emailVisibility = true;
-
-    try {
-      const response = await fetch(API_URL + Routes.user, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (!response.ok) {
-        message.error("Ya existe un usuario registrado con ese email");
-        setIsLoading(false);
-        return;
-      }
-
-      if (response.status === 200) {
-        message.success("Usuario registrado con éxito");
-        navigate(PageRoutes.login);
-      }
-
-      setIsLoading(false);
-    } catch (error: any) {
-      setIsLoading(false);
-    }
+    dispatch(httpRegisterAsync(newBody));
   };
 
   return {
     register,
-    isLoading,
+    handleReturnToLogin,
   };
 };
 

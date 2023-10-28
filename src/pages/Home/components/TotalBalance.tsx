@@ -11,7 +11,6 @@ import {
 import { useAppSelector } from "../../../app/hooks";
 // Hooks
 import useEditAvatarHooks from "../hooks/useEditAvatarHooks";
-import useProfileDataHooks from "../hooks/useProfileDataHooks";
 
 const TotalBalance = () => {
   const hoverRef = useRef(null);
@@ -24,7 +23,6 @@ const TotalBalance = () => {
   const bank = userData?.bank?.toFixed(2).replace(".", ",");
 
   const { editAvatar } = useEditAvatarHooks();
-  const { getProfileData } = useProfileDataHooks();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [url, setUrl] = useState("");
@@ -39,7 +37,6 @@ const TotalBalance = () => {
     };
 
     await editAvatar(data);
-    await getProfileData();
     setIsModalOpen(false);
   };
 
@@ -54,7 +51,13 @@ const TotalBalance = () => {
           <AvatarContainerStyled ref={hoverRef} onClick={showModal}>
             <Avatar
               size={64}
-              src={userData.avatar === "" ? avatarEmpty : userData?.avatar}
+              src={
+                userData.avatar === "" ||
+                userData.avatar === null ||
+                userData.avatar === undefined
+                  ? avatarEmpty
+                  : userData?.avatar
+              }
             />
             {isHover && <EditStyled />}
           </AvatarContainerStyled>

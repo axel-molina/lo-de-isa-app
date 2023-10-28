@@ -1,17 +1,18 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Routes } from "../../api/routes_api";
 import { API_URL } from "../api_url";
 import { message } from "antd";
 
 interface IEditProduct {
-    name: string;
-    stock: number;
-    price: number;
-    code: string;
-    user: string;
+  name: string;
+  stock: number;
+  price: number;
+  code: string;
+  user: string;
 }
 
-const editProduct = () => {
+const useEditProduct = () => {
   const token = localStorage.getItem("token");
   // Agregar Bearer al token y quitarle las comillas
   const tokenBearer = `Bearer ${token?.slice(1, -1)}`;
@@ -21,19 +22,22 @@ const editProduct = () => {
     productEdit: IEditProduct,
     setShow?: (value: boolean) => void,
     setRefresh?: (value: boolean) => void,
-    refresh?: boolean,
+    refresh?: boolean
   ) => {
     setIsLoadingEdit(true);
     try {
-      const response = await fetch(`${API_URL + Routes.products}/${productId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          Autorization: tokenBearer,
-        },
-        body: JSON.stringify(productEdit),
-      });
+      const response = await fetch(
+        `https://molisoft.pockethost.io/api/collections/products/records/${productId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Autorization: tokenBearer,
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(productEdit),
+        }
+      );
 
       if (response.status === 200) {
         message.success("Producto editado con éxito");
@@ -55,4 +59,4 @@ const editProduct = () => {
   };
 };
 
-export default editProduct;
+export default useEditProduct;

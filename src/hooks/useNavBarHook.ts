@@ -28,7 +28,7 @@ const useNavBarHook = () => {
     const token = localStorage.getItem("token");
     const userStorage = localStorage.getItem("user");
     // Si no hay datos en redux, los seteo con los datos del localstorage
-    if (userData.id === "") {
+    if (userData._id === "") {
       dispatch(setUser(JSON.parse(userStorage || "{}")));
     }
     // Si no hay token o datos de usuario en el localstorage, redirecciono al login

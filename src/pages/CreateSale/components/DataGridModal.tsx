@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // Interface
@@ -6,23 +7,32 @@ import { IProducts } from "../../../models/ProductsModel";
 import {
   ContainerGridStyled,
   HeaderGridStyledModal,
+  EmptyProductsContainer,
   ItemContainerStyledModal,
 } from "../styles/DataGridStyled";
 // Redux
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { addProduct } from "../../../features/productsInSalesOrder/productsInSalesOrderSlice";
-// Hooks
-import useProductListHook from "../../../hooks/useProductListHook";
 // Components
 import { Button } from "@mui/material";
 // import Spinner from "../../../components/Spinner/Spinner";
 import { message } from "antd";
 import { PageRoutes } from "../../../routes";
+// Services
+import useHttpGetProducts from "../../../services/products/useHttpGetProducts";
+import Spinner from "../../../components/Spinner/Spinner";
 
-const DataGridModal = () => {
+interface IPropsDataGridModal {
+  searchState: string;
+}
+
+const DataGridModal = ({ searchState }: IPropsDataGridModal) => {
+  const { httpGetProductsAsync } = useHttpGetProducts();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { getProducts, isLoading } = useProductListHook();
+  const isLoading = useAppSelector(
+    (state) => state.loadingProduct.isLoadingProducts
+  );
   const cart = useAppSelector((state) => state.productosEnOrdenDeVenta);
   const products = useAppSelector((state) => state.products);
   // const email = localStorage.getItem("email");
@@ -45,11 +55,9 @@ const DataGridModal = () => {
     message.success("Producto añadido");
   };
 
-  // console.log(products);
-
   useEffect(() => {
-    getProducts(1);
-  }, []);
+    dispatch(httpGetProductsAsync(1, 10, searchState.toString()));
+  }, [searchState]);
 
   return (
     <ContainerGridStyled>
@@ -59,24 +67,22 @@ const DataGridModal = () => {
         <div>Stock</div>
         <div></div>
       </HeaderGridStyledModal>
-      {products &&
+      {isLoading ? (
+        <div style={{ margin: "30px 0" }}>
+          <Spinner />
+        </div>
+      ) : (
         products.map((item: IProducts) => (
           <ItemContainerStyledModal key={item.id} onClick={() => addItem(item)}>
             <div>{item?.name}</div>
             <div style={{ marginLeft: "25%" }}>${item?.price?.toFixed(2)}</div>
             <div style={{ marginLeft: "48%" }}>{item?.stock}</div>
           </ItemContainerStyledModal>
-        ))}
+        ))
+      )}
 
       {(products?.length === 0 || products === null) && !isLoading && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            padding: "20px",
-          }}
-        >
+        <EmptyProductsContainer>
           <p style={{ textAlign: "center" }}>
             Aún no hay productos en tu lista
           </p>
@@ -87,7 +93,7 @@ const DataGridModal = () => {
           >
             Agregar productos
           </Button>
-        </div>
+        </EmptyProductsContainer>
       )}
     </ContainerGridStyled>
   );

@@ -4,6 +4,7 @@ import React from "react";
 import { Input, Modal, Button } from "antd";
 // Styles
 import { LabelStyled } from "../../SignIn/styles/FormSignInStyled";
+import { useAppSelector } from "../../../app/hooks";
 // Hooks
 import useModalNewProductsHook from "../hooks/useModalNewProductsHook";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -17,8 +18,12 @@ interface IModal {
 
 const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
   // Custom hook
-  const { handleAddNewProduct, handleInputChange, error, data, isLoading } =
+  const { handleAddNewProduct, handleInputChange, error, data } =
     useModalNewProductsHook(setRefresh, refresh);
+
+  const isLoading = useAppSelector(
+    (state) => state.loadingProduct.isLoadingPostProduct
+  );
 
   return (
     <Modal
@@ -31,7 +36,9 @@ const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
         >
           <Button onClick={() => setShow(false)}>Cancelar</Button>
           {isLoading ? (
-            <Spinner />
+            <div style={{ marginLeft: "15px" }}>
+              <Spinner />
+            </div>
           ) : (
             <Button type="primary" onClick={handleAddNewProduct}>
               Añadir

@@ -5,32 +5,33 @@ import { Button, Checkbox, Form, Input } from "antd";
 import {
   FormStyled,
   LabelStyled,
+  GoogleIconStyled,
+  ButtonGoogleStyled,
   ButtonsContainerStyled,
   RememberContainerStyled,
 } from "../styles/FormSignInStyled";
+import googleIcon from "../assets/google.png";
 import { PageRoutes } from "../../../routes";
-// Hooks
-import useLoginHook from "../../../hooks/useLoginHook";
-// import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-// import { setUser } from "../../../features/userData/userDataSlice";
+// Services
+import useHttplogin from "../../../services/auth/useHttpLogin";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const FormSignIn = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
+  // Services
+  const { httpLoginAsync } = useHttplogin();
 
-  // const [userEmail, setUserEmail] = useState("");
+  const isLoading = useAppSelector((state) => state.loadingAuth.isLoadingLogin);
 
-  // const token = useAppSelector((state) => state.token.value);
-
-  const email = "molinaaxel338@gmail.com";
+  const mail = "molinaprueba@gmail.com";
   const pass = "Ivanmln99*";
 
-  // Custom hooks
-  const { handleLogin, isLoading } = useLoginHook();
-
   // Al iniciar sesión
-  const onFinish = (values: any) => {
-    handleLogin(values);
+  const handleSignIn = (values: any) => {
+    const { email, password } = values;
+    dispatch(httpLoginAsync(email, password));
   };
 
   // Al registrarse
@@ -38,18 +39,22 @@ const FormSignIn = () => {
     navigate(PageRoutes.register);
   };
 
+  const loginGoogle = useGoogleLogin({
+    onSuccess: (tokenResponse) => console.log(tokenResponse),
+  });
+
   return (
     <FormStyled
       initialValues={{ remember: true }}
       autoComplete="off"
-      onFinish={onFinish}
+      onFinish={handleSignIn}
     >
       <div>
         <LabelStyled>Email</LabelStyled>
         <Form.Item
-          name="identity"
+          name="email"
           rules={[{ required: true, message: "Ingrese su email" }]}
-          initialValue={email}
+          initialValue={mail}
         >
           <Input placeholder="Email" />
         </Form.Item>
@@ -77,6 +82,10 @@ const FormSignIn = () => {
             Registrarme
           </Button>
         </ButtonsContainerStyled>
+        <ButtonGoogleStyled onClick={() => loginGoogle()}>
+          <GoogleIconStyled src={googleIcon} alt="google" />
+          <span>Ingresar con Google</span>
+        </ButtonGoogleStyled>
       </div>
     </FormStyled>
   );

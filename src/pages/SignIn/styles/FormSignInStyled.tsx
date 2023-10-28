@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form } from "antd";
+import { Form, Button } from "antd";
 
 export const FormStyled = styled(Form)`
   display: flex;
@@ -23,4 +23,18 @@ export const ButtonsContainerStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+`;
+
+export const GoogleIconStyled = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
+export const ButtonGoogleStyled = styled(Button)`
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
 `;

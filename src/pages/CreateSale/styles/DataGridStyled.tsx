@@ -55,3 +55,10 @@ export const ItemContainerStyledModal = styled.div`
 export const InfoStyled = styled.div`
   color: gray;
 `;
+
+export const EmptyProductsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+`;

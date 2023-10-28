@@ -7,10 +7,9 @@ import ListMenu from "./components/ListMenu";
 // import Spinner from '../../components/Spinner/Spinner';
 
 const index = () => (
-
   <div>
     <Header />
-    {<TotalBalance />}
+    <TotalBalance />
     <ListMenu />
   </div>
 );

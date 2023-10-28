@@ -7,8 +7,14 @@
   "env": {
     "browser": true
   },
-  "rules": {
-    "no-console": ["warn"]
-  },
-  "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"]
+  "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": ["warn"],
+        "indent": ["off"]
+      }
+    }
+  ]
 }
