@@ -2,10 +2,15 @@
 import React from "react";
 // Components
 import { Input, Modal, Button } from "antd";
+import { ReloadOutlined } from "@ant-design/icons";
 // Styles
 import { LabelStyled } from "../../SignIn/styles/FormSignInStyled";
-import { useAppSelector } from "../../../app/hooks";
+import {
+  ButtonsContainerStyled,
+  ContainerSpinnerStyled,
+} from "../styles/ModalStyles";
 // Hooks
+import { useAppSelector } from "../../../app/hooks";
 import useModalNewProductsHook from "../hooks/useModalNewProductsHook";
 import Spinner from "../../../components/Spinner/Spinner";
 
@@ -18,8 +23,14 @@ interface IModal {
 
 const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
   // Custom hook
-  const { handleAddNewProduct, handleInputChange, error, data } =
-    useModalNewProductsHook(setRefresh, refresh);
+  const {
+    data,
+    error,
+    handleInputChange,
+    handleEnterPress,
+    handleClearInputs,
+    handleAddNewProduct,
+  } = useModalNewProductsHook(setRefresh, refresh);
 
   const isLoading = useAppSelector(
     (state) => state.loadingProduct.isLoadingPostProduct
@@ -31,51 +42,58 @@ const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
       open={show}
       onCancel={() => setShow(false)}
       footer={[
-        <div
-          style={{ display: "flex", gap: "5px", justifyContent: "flex-end" }}
-        >
-          <Button onClick={() => setShow(false)}>Cancelar</Button>
-          {isLoading ? (
-            <div style={{ marginLeft: "15px" }}>
-              <Spinner />
-            </div>
-          ) : (
-            <Button type="primary" onClick={handleAddNewProduct}>
-              Añadir
-            </Button>
-          )}
-        </div>,
+        <ButtonsContainerStyled>
+          <Button onClick={handleClearInputs}>
+            <ReloadOutlined />
+          </Button>
+          <div>
+            <Button onClick={() => setShow(false)}>Cancelar</Button>
+            {isLoading ? (
+              <ContainerSpinnerStyled style={{ marginLeft: "15px" }}>
+                <Spinner />
+              </ContainerSpinnerStyled>
+            ) : (
+              <Button type="primary" onClick={handleAddNewProduct}>
+                Añadir
+              </Button>
+            )}
+          </div>
+        </ButtonsContainerStyled>,
       ]}
     >
       <LabelStyled>Nombre del producto</LabelStyled>
       <Input
-        placeholder="Nombre del producto"
         name="name"
         value={data.name}
+        placeholder="Nombre del producto"
+        onKeyPress={(e) => handleEnterPress(e)}
         onChange={(e) => handleInputChange(e)}
       />
       <LabelStyled>Precio</LabelStyled>
       <Input
         type="number"
-        placeholder="Precio"
         name="price"
         value={data.price}
+        placeholder="Precio"
         onChange={(e) => handleInputChange(e)}
+        onKeyPress={(e) => handleEnterPress(e)}
       />
       <LabelStyled>Stock</LabelStyled>
       <Input
+        name="stock"
         type="number"
         placeholder="Stock"
-        name="stock"
         value={data.stock}
         onChange={(e) => handleInputChange(e)}
+        onKeyPress={(e) => handleEnterPress(e)}
       />
       <LabelStyled>Código</LabelStyled>
       <Input
-        placeholder="Código"
         name="code"
         value={data.code}
+        placeholder="Código"
         onChange={(e) => handleInputChange(e)}
+        onKeyPress={(e) => handleEnterPress(e)}
       />
       <p style={{ color: "red" }}>{error}</p>
     </Modal>

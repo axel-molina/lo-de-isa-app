@@ -1,19 +1,26 @@
 /* eslint-disable multiline-ternary */
 import { useState, useEffect } from "react";
-import { Button } from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
-import { IProducts } from "../../../models/ProductsModel";
+// Styles
 import {
-  ContainerGridStyled,
-  HeaderGridStyled,
   InfoStyled,
+  HeaderGridStyled,
+  ContainerGridStyled,
   ItemContainerStyled,
 } from "../../CreateSale/styles/DataGridStyled";
-import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
-import { useAppSelector, useAppDispatch } from "../../../app/hooks";
-import useHttpGetProducts from "../../../services/products/useHttpGetProducts";
+import { ContainerSpinnerStyled } from "../styles/DataGridStyles";
+// Components
+import { Button } from "@mui/material";
 import EditProductModal from "./EditProductModal";
+import { Delete, Edit } from "@mui/icons-material";
 import Spinner from "../../../components/Spinner/Spinner";
+import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
+import { Pagination } from "antd";
+// Hooks
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+// Models
+import { Products } from "../../../models/Products/Products.model";
+// Services
+import useHttpGetProducts from "../../../services/products/useHttpGetProducts";
 
 interface IDataGrid {
   refresh: boolean;
@@ -27,32 +34,35 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
 
   const [show, setShow] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const products = useAppSelector((state) => state.products);
-  const [product, setProduct] = useState<IProducts>({
-    id: "",
+  const products = useAppSelector((state) => state.products.products);
+  const pagination = useAppSelector((state) => state.products.pagination);
+  const [product, setProduct] = useState<Products>({
+    _id: "",
     name: "",
     stock: 0,
     price: 0,
     code: "",
-    user: "",
-    updated: "",
-    collectionId: "",
-    collectionName: "",
-    created: "",
+    userId: "",
+    updatedAt: "",
+    createdAt: "",
   });
 
   const isLoading = useAppSelector(
     (state) => state.loadingProduct.isLoadingProducts
   );
 
-  const deleteProduct = (item: IProducts) => {
+  const deleteProduct = (item: Products) => {
     setProduct(item);
     setShow(true);
   };
 
-  const editProduct = (item: IProducts) => {
+  const editProduct = (item: Products) => {
     setProduct(item);
     setShowEditModal(true);
+  };
+
+  const handleChangePage = (page: number) => {
+    dispatch(httpGetProductsAsync(page, 10, ""));
   };
 
   useEffect(() => {
@@ -67,36 +77,49 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
         <div>Eliminar</div>
       </HeaderGridStyled>
       {isLoading ? (
-        <div style={{ margin: "60px auto" }}>
+        <ContainerSpinnerStyled>
           <Spinner />
-        </div>
+        </ContainerSpinnerStyled>
       ) : (
         <div>
-          {products.map((product: IProducts) => (
-            <ItemContainerStyled key={product.id}>
-              <div>
-                <b>{product.name}</b>
-                <InfoStyled>Stock: {product.stock}</InfoStyled>
-                <InfoStyled>${product.price.toFixed(2)}</InfoStyled>
-              </div>
-              <div style={{}}>
-                <Button variant="outlined" onClick={() => editProduct(product)}>
-                  <Edit />
-                </Button>
-              </div>
-              <div style={{}}>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => deleteProduct(product)}
-                >
-                  <Delete />
-                </Button>
-              </div>
-            </ItemContainerStyled>
-          ))}
+          {products &&
+            products.map((product: Products) => (
+              <ItemContainerStyled key={product._id}>
+                <div>
+                  <b>{product.name}</b>
+                  <InfoStyled>Stock: {product.stock}</InfoStyled>
+                  <InfoStyled>${product.price.toFixed(2)}</InfoStyled>
+                </div>
+                <div>
+                  <Button
+                    variant="outlined"
+                    onClick={() => editProduct(product)}
+                  >
+                    <Edit />
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => deleteProduct(product)}
+                  >
+                    <Delete />
+                  </Button>
+                </div>
+              </ItemContainerStyled>
+            ))}
         </div>
       )}
+      {/* Paginacion */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Pagination
+          defaultCurrent={1}
+          onChange={handleChangePage}
+          total={pagination.totalProducts}
+          showTotal={(total) => `${total} resultados`}
+        />
+      </div>
       {/* Modal confirmación de eliminación */}
       <ConfirmationDeleteModal
         product={product}

@@ -31,10 +31,20 @@ export const userDataSlice = createSlice({
     editBank: (state, action: PayloadAction<number>) => {
       state.bank = action.payload;
     },
+    resetUser: (state) => {
+      state._id = "";
+      state.bank = 0;
+      state.email = "";
+      state.avatar = "";
+      state.name = "";
+      state.lastName = "";
+      state.createdAt = "";
+      state.updatedAt = "";
+    },
   },
 });
 
-export const { editBank, setUser } = userDataSlice.actions;
+export const { editBank, setUser, resetUser } = userDataSlice.actions;
 
 export const selectUserData = (state: RootState) => state.userData;
 

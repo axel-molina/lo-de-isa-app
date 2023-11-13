@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
 import { useAppDispatch } from "../../../app/hooks";
 // Services
 import useHttpPostProduct from "../../../services/products/useHttpPostProduct";
@@ -33,6 +33,22 @@ const useModalNewProductsHook = (
     });
   };
 
+  const handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    console.log(event.key);
+    if (event.key === "Enter") {
+      handleAddNewProduct();
+    }
+  };
+
+  const handleClearInputs = () => {
+    setData({
+      name: "",
+      price: 0,
+      stock: 0,
+      code: "",
+    });
+  };
+
   const handleAddNewProduct = () => {
     setError("");
     if (data.name === "") {
@@ -49,6 +65,8 @@ const useModalNewProductsHook = (
   return {
     data,
     error,
+    handleEnterPress,
+    handleClearInputs,
     handleInputChange,
     handleAddNewProduct,
   };

@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import { Delete, DeleteForever } from "@mui/icons-material";
 // Interface
-import { IProducts } from "../../../models/ProductsModel";
+import { Products } from "../../../models/Products/Products.model";
 // Styles
 import {
   HeaderGridStyled,
@@ -24,12 +24,12 @@ const DataGrid = () => {
     (state) => state.productosEnOrdenDeVenta
   );
 
-  const deleteItem = (item: IProducts) => {
+  const deleteItem = (item: Products) => {
     // Eliminar de redux
     dispatch(removeOneProduct(item));
   };
 
-  const deleteAllItems = (item: IProducts) => {
+  const deleteAllItems = (item: Products) => {
     // Eliminar de redux
     dispatch(removeAllItems(item));
   };
@@ -41,8 +41,8 @@ const DataGrid = () => {
         <div>Eliminar</div>
         <div>Eliminar todo</div>
       </HeaderGridStyled>
-      {productosEnOrdenDeVenta.map((item: IProducts) => (
-        <ItemContainerStyled key={item.id}>
+      {productosEnOrdenDeVenta.map((item: Products) => (
+        <ItemContainerStyled key={item._id}>
           <div>
             <div style={{ display: "flex", gap: "10px" }}>
               <b>{item.name}</b>

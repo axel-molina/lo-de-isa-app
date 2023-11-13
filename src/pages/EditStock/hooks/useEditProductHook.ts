@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { IProducts } from "../../../models/ProductsModel";
+import { Products } from "../../../models/Products/Products.model";
 import useHttpEditProduct from "../../../services/products/useHttpEditProduct";
 
 const useEditProductHook = (
-  product: IProducts,
+  product: Products,
   show: boolean,
   setShow: (value: boolean) => void,
   refresh: boolean,
@@ -24,7 +24,7 @@ const useEditProductHook = (
   const handleEditProduct = () => {
     setError("");
     if (validateFields()) {
-      editAsyncProduct(product.id, productEdit, setShow, setRefresh, refresh);
+      editAsyncProduct(product._id, productEdit, setShow, setRefresh, refresh);
     }
   };
 
@@ -51,7 +51,7 @@ const useEditProductHook = (
       stock: Number(product.stock),
       price: Number(product.price),
       code: product.code,
-      user: product.user,
+      user: product.userId,
     });
   }, [product, show]);
 

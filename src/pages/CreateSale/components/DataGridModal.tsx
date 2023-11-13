@@ -1,8 +1,7 @@
 /* eslint-disable multiline-ternary */
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // Interface
-import { IProducts } from "../../../models/ProductsModel";
+import { Products } from "../../../models/Products/Products.model";
 // Styles
 import {
   ContainerGridStyled,
@@ -15,33 +14,25 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { addProduct } from "../../../features/productsInSalesOrder/productsInSalesOrderSlice";
 // Components
 import { Button } from "@mui/material";
-// import Spinner from "../../../components/Spinner/Spinner";
 import { message } from "antd";
 import { PageRoutes } from "../../../routes";
-// Services
-import useHttpGetProducts from "../../../services/products/useHttpGetProducts";
 import Spinner from "../../../components/Spinner/Spinner";
 
-interface IPropsDataGridModal {
-  searchState: string;
-}
-
-const DataGridModal = ({ searchState }: IPropsDataGridModal) => {
-  const { httpGetProductsAsync } = useHttpGetProducts();
+const DataGridModal = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLoading = useAppSelector(
     (state) => state.loadingProduct.isLoadingProducts
   );
   const cart = useAppSelector((state) => state.productosEnOrdenDeVenta);
-  const products = useAppSelector((state) => state.products);
+  const products = useAppSelector((state) => state.products.products);
   // const email = localStorage.getItem("email");
 
-  const noStockAvalible = (item: IProducts) =>
+  const noStockAvalible = (item: Products) =>
     // Verificar si el item ya existe en el carrito y si la cantidad es igual al stock
-    cart.find((cartItem) => cartItem.id === item.id) &&
-    cart.find((cartItem) => cartItem.id === item.id)?.stock === item.stock;
-  const addItem = (item: IProducts) => {
+    cart.find((cartItem) => cartItem._id === item._id) &&
+    cart.find((cartItem) => cartItem._id === item._id)?.stock === item.stock;
+  const addItem = (item: Products) => {
     if (noStockAvalible(item)) {
       message.error("No hay suficiente stock disponible");
       return;
@@ -54,10 +45,6 @@ const DataGridModal = ({ searchState }: IPropsDataGridModal) => {
     dispatch(addProduct(newItem));
     message.success("Producto añadido");
   };
-
-  useEffect(() => {
-    dispatch(httpGetProductsAsync(1, 10, searchState.toString()));
-  }, [searchState]);
 
   return (
     <ContainerGridStyled>
@@ -72,8 +59,11 @@ const DataGridModal = ({ searchState }: IPropsDataGridModal) => {
           <Spinner />
         </div>
       ) : (
-        products.map((item: IProducts) => (
-          <ItemContainerStyledModal key={item.id} onClick={() => addItem(item)}>
+        products.map((item: Products) => (
+          <ItemContainerStyledModal
+            key={item._id}
+            onClick={() => addItem(item)}
+          >
             <div>{item?.name}</div>
             <div style={{ marginLeft: "25%" }}>${item?.price?.toFixed(2)}</div>
             <div style={{ marginLeft: "48%" }}>{item?.stock}</div>
@@ -81,7 +71,7 @@ const DataGridModal = ({ searchState }: IPropsDataGridModal) => {
         ))
       )}
 
-      {(products?.length === 0 || products === null) && !isLoading && (
+      {(products.length === 0 || products === null) && !isLoading && (
         <EmptyProductsContainer>
           <p style={{ textAlign: "center" }}>
             Aún no hay productos en tu lista

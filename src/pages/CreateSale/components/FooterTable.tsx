@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { clearCart } from "../../../features/productsInSalesOrder/productsInSalesOrderSlice";
 import { editBank } from "../../../features/userData/userDataSlice";
 // Models
-import { IProducts } from "../../../models/ProductsModel";
+import { Products } from "../../../models/Products/Products.model";
 // Services
 import useHttpEditProduct from "../../../services/products/useHttpEditProduct";
 
@@ -29,7 +29,7 @@ const FooterTable = ({ precioFinal }: IPrice) => {
     (state) => state.productosEnOrdenDeVenta
   );
 
-  const ProductsInStock = useAppSelector((state) => state.products);
+  const ProductsInStock = useAppSelector((state) => state.products.products);
 
   // Mostart precio con dos decimales
   const precioFinalConDosDecimales = precioFinal?.toFixed(2).replace(".", ",");
@@ -56,10 +56,10 @@ const FooterTable = ({ precioFinal }: IPrice) => {
 
   const sellProducts = () => {
     // Lista de productos en orden de venta
-    ListaOrdenDeVenta.forEach((item: IProducts) => {
+    ListaOrdenDeVenta.forEach((item: Products) => {
       // si item.id de la lista es igual al producto que esta en la base de datos
       const productBase = ProductsInStock.find(
-        (product) => product.id === item.id
+        (product: Products) => product._id === item._id
       );
       // restar stock
       const newStock = productBase && productBase.stock - item.stock;
@@ -70,10 +70,10 @@ const FooterTable = ({ precioFinal }: IPrice) => {
           stock: newStock,
           price: item.price,
           code: item.code,
-          user: item.user,
+          user: item.userId,
         };
         // editar producto en la base de datos
-        editAsyncProduct(item.id, newProduct);
+        editAsyncProduct(item._id, newProduct);
       }
     });
   };

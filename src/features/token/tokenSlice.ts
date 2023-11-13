@@ -11,10 +11,13 @@ export const tokenSlice = createSlice({
     setTokenRedux: (state, action: PayloadAction<string>) => {
       state.value = action.payload;
     },
+    deleteTokenRedux: (state) => {
+      state.value = "";
+    },
   },
 });
 
-export const { setTokenRedux } = tokenSlice.actions;
+export const { setTokenRedux, deleteTokenRedux } = tokenSlice.actions;
 
 export const selectDrawer = (state: RootState) => state.drawer.showDrawer;
 

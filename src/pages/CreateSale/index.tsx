@@ -6,23 +6,30 @@ import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import FooterTable from "./components/FooterTable";
 // Interface
-import { IProducts } from "../../models/ProductsModel";
+import { Products } from "../../models/Products/Products.model";
 import ModalAñadirProd from "./components/ModalAddProd";
 // Redux
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 // Styles
 import { ContainerStyled, ContainerButton } from "./styles/Styles";
+// Services
+import useHttpGetProducts from "../../services/products/useHttpGetProducts";
 
 const Index = () => {
+  const { httpGetProductsAsync } = useHttpGetProducts();
+
+  const dispatch = useAppDispatch();
+
   const ListaOrdenDeVenta = useAppSelector(
     (state) => state.productosEnOrdenDeVenta
   );
 
   const [show, setShow] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
 
   const sumaDePrecios = (): number => {
     let suma = 0;
-    ListaOrdenDeVenta.forEach((item: IProducts) => {
+    ListaOrdenDeVenta.forEach((item: Products) => {
       suma += item.price * item.stock;
     });
     return suma;
@@ -31,6 +38,11 @@ const Index = () => {
   // Mostrar el modal
   const showModal = () => {
     setShow(true);
+  };
+
+  // Cuando se presiona enter en el input de buscar
+  const handleSearchProduct = () => {
+    dispatch(httpGetProductsAsync(1, 10, search.toString()));
   };
 
   useEffect(() => {
@@ -56,7 +68,13 @@ const Index = () => {
         </ContainerButton>
         <DataGrid />
         <FooterTable precioFinal={sumaDePrecios()} />
-        <ModalAñadirProd show={show} setShow={setShow} />
+        <ModalAñadirProd
+          show={show}
+          setShow={setShow}
+          handleSearchProduct={handleSearchProduct}
+          setSearch={setSearch}
+          search={search}
+        />
       </ContainerStyled>
     </>
   );

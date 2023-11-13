@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
-import { IProducts } from "../../models/ProductsModel";
+import { Products } from "../../models/Products/Products.model";
 
-const initialState: IProducts[] = [];
+const initialState: Products[] = [];
 
 export const productsInSalesOrderSlice = createSlice({
   name: "productsInSalesOrder",
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<IProducts>) => {
+    addProduct: (state, action: PayloadAction<Products>) => {
       // Si el producto ya existe en el carrito, se aumenta la cantidad
       const productIndex = state.findIndex(
-        (product) => product.id === action.payload.id
+        (product) => product._id === action.payload._id
       );
       if (productIndex !== -1) {
         // modifico la cantidad
@@ -22,10 +22,10 @@ export const productsInSalesOrderSlice = createSlice({
       // Si el producto no existe en el carrito, se agrega
       state.push(action.payload);
     },
-    removeOneProduct: (state, action: PayloadAction<IProducts>) => {
+    removeOneProduct: (state, action: PayloadAction<Products>) => {
       // Si el producto ya existe en el carrito, se disminuye la cantidad
       const productIndex = state.findIndex(
-        (product) => product.id === action.payload.id
+        (product) => product._id === action.payload._id
       );
       if (productIndex !== -1) {
         state[productIndex].stock -= 1;
@@ -34,7 +34,8 @@ export const productsInSalesOrderSlice = createSlice({
         }
       }
     },
-    removeAllItems: (state, action: PayloadAction<IProducts>) => state.filter((product) => product.id !== action.payload.id),
+    removeAllItems: (state, action: PayloadAction<Products>) =>
+      state.filter((product) => product._id !== action.payload._id),
     clearCart: (state, action) => {
       // eslint-disable-next-line no-unused-expressions
       action.payload;

@@ -3,14 +3,14 @@ import { Modal, Button, Input } from "antd";
 // Styles
 import { LabelStyled } from "../../SignIn/styles/FormSignInStyled";
 // Models
-import { IProducts } from "../../../models/ProductsModel";
+import { Products } from "../../../models/Products/Products.model";
 // Hooks
 import useEditProductHook from "../hooks/useEditProductHook";
 
 interface IModal {
   show: boolean;
   setShow: (show: boolean) => void;
-  product: IProducts;
+  product: Products;
   refresh: boolean;
   setRefresh: (refresh: boolean) => void;
 }

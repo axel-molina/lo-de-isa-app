@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 import React from "react";
-import { IProducts } from "../../../models/ProductsModel";
+import { Products } from "../../../models/Products/Products.model";
 import { Modal, Button } from "antd";
 import useDeleteProductHook from "../hooks/useDeleteProductHook";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -8,7 +8,7 @@ import Spinner from "../../../components/Spinner/Spinner";
 interface IConfirmationDeleteModal {
   show: boolean;
   setShow: (value: boolean) => void;
-  product: IProducts;
+  product: Products;
   refresh: boolean;
   setRefresh: (value: boolean) => void;
 }
@@ -43,7 +43,7 @@ const ConfirmationDeleteModal = ({
             <Button
               type="primary"
               danger
-              onClick={() => handleDeleteProduct(product.id)}
+              onClick={() => handleDeleteProduct(product._id)}
             >
               Eliminar
             </Button>

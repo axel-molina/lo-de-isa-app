@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { Routes } from "../../api/routes_api";
-import { API_URL } from "../api_url";
+import { useAppDispatch } from "../../app/hooks";
 import { message } from "antd";
+import { deleteTokenRedux } from "../../features/token/tokenSlice";
+import { resetUser } from "../../features/userData/userDataSlice";
+import { useNavigate } from "react-router-dom";
+import { PageRoutes } from "../../routes";
 
 interface IEditProduct {
   name: string;
@@ -13,6 +16,8 @@ interface IEditProduct {
 }
 
 const useEditProduct = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   // Agregar Bearer al token y quitarle las comillas
   const tokenBearer = `Bearer ${token?.slice(1, -1)}`;
@@ -38,6 +43,16 @@ const useEditProduct = () => {
           body: JSON.stringify(productEdit),
         }
       );
+
+      if (response.status === 401) {
+        message.error("Sesión expirada, por favor inicie sesión nuevamente");
+        localStorage.clear();
+        dispatch(deleteTokenRedux());
+        dispatch(resetUser());
+        navigate(PageRoutes.login);
+        setIsLoadingEdit(false);
+        return;
+      }
 
       if (response.status === 200) {
         message.success("Producto editado con éxito");

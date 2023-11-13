@@ -23,7 +23,12 @@ const index = () => {
     <ContainerStyled>
       <TitleStyled>
         <LinkStyled to="/">
-          <img src={icon} alt="molisoft icon" style={{ width: "2rem" }} />
+          <img
+            src={icon}
+            alt="molisoft icon"
+            loading="lazy"
+            style={{ width: "2rem" }}
+          />
           Molisoft
         </LinkStyled>
       </TitleStyled>
