@@ -55,7 +55,7 @@ const ModalAñadirProd = ({
             />
           </Col>
           <Col span={2}>
-            <Button>Buscar</Button>
+            <Button type="primary">Buscar</Button>
           </Col>
           <Col span={24}>
             <DataGridModal />
