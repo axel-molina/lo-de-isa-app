@@ -26,6 +26,7 @@ const ModalAñadirProd = ({
   setSearch,
   search,
 }: IModal) => {
+  // Cuando cierre el modal
   const handleClose = () => {
     setShow(false);
   };
