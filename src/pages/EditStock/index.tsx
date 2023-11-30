@@ -4,9 +4,9 @@ import Header from "../../components/NavBar";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import DataGridStock from "./components/DataGridStock";
+import ModalAddNewProduct from "./components/AddNewProductModal";
 // Styles
 import { ContainerStyled, ContainerButton } from "../CreateSale/styles/Styles";
-import ModalAddNewProduct from "./components/AddNewProductModal";
 
 const index = () => {
   const [show, setShow] = useState(false);

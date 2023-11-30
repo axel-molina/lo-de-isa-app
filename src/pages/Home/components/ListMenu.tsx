@@ -21,6 +21,7 @@ const ListMenu = () => {
     <List
       sx={{
         marginTop: "30px",
+        marginBottom: "40%",
       }}
     >
       <Divider />

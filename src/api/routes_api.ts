@@ -7,6 +7,4 @@ export enum Routes {
   PRODUCT = "/product",
   GET_PRODUCT_BY_ID = "/product/:id",
   GET_PRODUCT_PAGINATED = "/product/paginated",
-  PUT_PRODUCT = "/product/:id",
-  DELETE_PRODUCT = "/product/:id",
 }

@@ -6,6 +6,7 @@ import { LabelStyled } from "../../SignIn/styles/FormSignInStyled";
 import { Products } from "../../../models/Products/Products.model";
 // Hooks
 import useEditProductHook from "../hooks/useEditProductHook";
+import { useAppSelector } from "../../../app/hooks";
 
 interface IModal {
   show: boolean;
@@ -25,6 +26,10 @@ const EditProductModal = ({
   const { productEdit, handleInputChange, handleEditProduct, error } =
     useEditProductHook(product, show, setShow, refresh, setRefresh);
 
+  const isLoadingEditProduct = useAppSelector(
+    (state) => state.loadingProduct.isLoadingEditProduct
+  );
+
   return (
     <Modal
       title={`Editar ${product.name}`}
@@ -35,7 +40,11 @@ const EditProductModal = ({
           style={{ display: "flex", gap: "5px", justifyContent: "flex-end" }}
         >
           <Button onClick={() => setShow(false)}>Cancelar</Button>
-          <Button type="primary" onClick={handleEditProduct}>
+          <Button
+            type="primary"
+            loading={isLoadingEditProduct}
+            onClick={handleEditProduct}
+          >
             Editar
           </Button>
         </div>,

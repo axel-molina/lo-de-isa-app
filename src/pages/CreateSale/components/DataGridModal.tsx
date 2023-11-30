@@ -73,9 +73,7 @@ const DataGridModal = () => {
 
       {(products.length === 0 || products === null) && !isLoading && (
         <EmptyProductsContainer>
-          <p style={{ textAlign: "center" }}>
-            Aún no hay productos en tu lista
-          </p>
+          <p style={{ textAlign: "center" }}>No se encuentran resultados</p>
           <Button
             color="success"
             variant="contained"

@@ -6,6 +6,7 @@ import RequireAuth from "./utils/requireAuth";
 import Drawer from "./components/Drawer";
 import { PageRoutes } from "./routes";
 import Spinner from "./components/Spinner/Spinner";
+import Footer from "./components/Footer";
 // Pages
 const Home = lazy(() => import("./pages/Home"));
 const Register = lazy(() => import("./pages/Register"));
@@ -17,7 +18,15 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 
 function App() {
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        justifyContent: "space-between",
+      }}
+    >
       <Suspense
         fallback={
           <div style={{ marginTop: "30%" }}>
@@ -65,6 +74,7 @@ function App() {
         </Routes>
         <Drawer />
       </Suspense>
+      <Footer />
     </div>
   );
 }

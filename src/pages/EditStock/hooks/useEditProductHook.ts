@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Products } from "../../../models/Products/Products.model";
 import useHttpEditProduct from "../../../services/products/useHttpEditProduct";
+import { useAppDispatch } from "../../../app/hooks";
 
 const useEditProductHook = (
   product: Products,
@@ -9,7 +10,8 @@ const useEditProductHook = (
   refresh: boolean,
   setRefresh: (value: boolean) => void
 ) => {
-  const { editAsyncProduct, isLoadingEdit } = useHttpEditProduct();
+  const dispatch = useAppDispatch();
+  const { httpEditProductAsync } = useHttpEditProduct();
   const [error, setError] = useState("");
 
   // setear el producto a editar
@@ -24,7 +26,16 @@ const useEditProductHook = (
   const handleEditProduct = () => {
     setError("");
     if (validateFields()) {
-      editAsyncProduct(product._id, productEdit, setShow, setRefresh, refresh);
+      dispatch(
+        httpEditProductAsync({
+          id: product._id,
+          body: productEdit,
+          setShow,
+          show,
+          refresh,
+          setRefresh,
+        })
+      );
     }
   };
 
@@ -58,7 +69,6 @@ const useEditProductHook = (
   return {
     error,
     productEdit,
-    isLoadingEdit,
     handleEditProduct,
     handleInputChange,
   };

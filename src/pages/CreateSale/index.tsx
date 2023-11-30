@@ -50,7 +50,7 @@ const Index = () => {
   }, [ListaOrdenDeVenta]);
 
   return (
-    <>
+    <div>
       <Header />
       <ContainerStyled>
         <ContainerButton>
@@ -76,7 +76,7 @@ const Index = () => {
           search={search}
         />
       </ContainerStyled>
-    </>
+    </div>
   );
 };
 

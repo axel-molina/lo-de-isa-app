@@ -5,14 +5,10 @@ import { Input, Modal, Button } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 // Styles
 import { LabelStyled } from "../../SignIn/styles/FormSignInStyled";
-import {
-  ButtonsContainerStyled,
-  ContainerSpinnerStyled,
-} from "../styles/ModalStyles";
+import { ButtonsContainerStyled } from "../styles/ModalStyles";
 // Hooks
 import { useAppSelector } from "../../../app/hooks";
 import useModalNewProductsHook from "../hooks/useModalNewProductsHook";
-import Spinner from "../../../components/Spinner/Spinner";
 
 interface IModal {
   show: boolean;
@@ -32,7 +28,7 @@ const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
     handleAddNewProduct,
   } = useModalNewProductsHook(setRefresh, refresh);
 
-  const isLoading = useAppSelector(
+  const isLoadingAddProduct = useAppSelector(
     (state) => state.loadingProduct.isLoadingPostProduct
   );
 
@@ -48,15 +44,13 @@ const AddNewProductModal = ({ show, setShow, setRefresh, refresh }: IModal) => {
           </Button>
           <div>
             <Button onClick={() => setShow(false)}>Cancelar</Button>
-            {isLoading ? (
-              <ContainerSpinnerStyled style={{ marginLeft: "15px" }}>
-                <Spinner />
-              </ContainerSpinnerStyled>
-            ) : (
-              <Button type="primary" onClick={handleAddNewProduct}>
-                Añadir
-              </Button>
-            )}
+            <Button
+              type="primary"
+              loading={isLoadingAddProduct}
+              onClick={handleAddNewProduct}
+            >
+              Añadir
+            </Button>
           </div>
         </ButtonsContainerStyled>,
       ]}

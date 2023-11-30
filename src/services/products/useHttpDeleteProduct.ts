@@ -2,7 +2,7 @@ import { message } from "antd";
 import { API_URL } from "../api_url";
 import { AppThunk } from "../../app/store";
 import { Routes } from "../../api/routes_api";
-import { setIsLoadingEditProduct } from "../../features/loading/loadingProductSlice";
+import { setIsLoadingDeleteProduct } from "../../features/loading/loadingProductSlice";
 import { getToken } from "../../utils/token";
 import { deleteTokenRedux } from "../../features/token/tokenSlice";
 import { resetUser } from "../../features/userData/userDataSlice";
@@ -24,29 +24,27 @@ interface IEditProduct {
   setRefresh: (value: boolean) => void;
 }
 
-const useHttpEditProduct = () => {
+const useHttpDeleteProduct = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token") || getToken();
   const tokenWithoutQuotes = token?.replace(/['"]+/g, "");
-  const httpEditProductAsync =
+  const httpDeleteProductAsync =
     ({
       id,
-      body,
       setShow,
       show,
       refresh,
       setRefresh,
     }: IEditProduct): AppThunk =>
     async (dispatch) => {
-      dispatch(setIsLoadingEditProduct(true));
+      dispatch(setIsLoadingDeleteProduct(true));
       try {
         const response = await fetch(`${API_URL}${Routes.PRODUCT}/${id}`, {
-          method: "PUT",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${tokenWithoutQuotes}`,
           },
-          body: JSON.stringify(body),
         });
 
         if (response.status === 401) {
@@ -55,27 +53,27 @@ const useHttpEditProduct = () => {
           dispatch(deleteTokenRedux());
           dispatch(resetUser());
           navigate(PageRoutes.login);
-          dispatch(setIsLoadingEditProduct(false));
+          dispatch(setIsLoadingDeleteProduct(false));
           return;
         }
 
         if (response.ok) {
           setRefresh(!refresh);
           setShow(!show);
-          message.success("Producto editado exitosamente");
-          dispatch(setIsLoadingEditProduct(false));
+          message.success("Producto eliminado exitosamente");
+          dispatch(setIsLoadingDeleteProduct(false));
         } else {
-          message.error("Error al editar producto");
-          dispatch(setIsLoadingEditProduct(false));
+          message.error("Error al eliminar producto");
+          dispatch(setIsLoadingDeleteProduct(false));
         }
       } catch (error) {
-        message.error("Error al editar producto");
-        dispatch(setIsLoadingEditProduct(false));
+        message.error("Error al eliminar producto");
+        dispatch(setIsLoadingDeleteProduct(false));
       }
     };
   return {
-    httpEditProductAsync,
+    httpDeleteProductAsync,
   };
 };
 
-export default useHttpEditProduct;
+export default useHttpDeleteProduct;

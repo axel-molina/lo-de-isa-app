@@ -37,8 +37,6 @@ const useHttpGetProducts = () => {
             },
           }
         );
-
-        const data: Data = await response.json();
         if (response.status === 401) {
           message.error("Sesión expirada, por favor inicie sesión nuevamente");
           localStorage.clear();
@@ -48,6 +46,8 @@ const useHttpGetProducts = () => {
           dispatch(setIsLoadingProducts(false));
           return;
         }
+
+        const data: Data = await response.json();
         if (response.ok) {
           dispatch(addProducts(data.data.products));
           dispatch(addPagination(data.data.pagination));

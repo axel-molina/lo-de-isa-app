@@ -2,8 +2,8 @@
 import React from "react";
 import { Products } from "../../../models/Products/Products.model";
 import { Modal, Button } from "antd";
-import useDeleteProductHook from "../hooks/useDeleteProductHook";
-import Spinner from "../../../components/Spinner/Spinner";
+import useHttpDeleteProduct from "../../../services/products/useHttpDeleteProduct";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 
 interface IConfirmationDeleteModal {
   show: boolean;
@@ -20,10 +20,23 @@ const ConfirmationDeleteModal = ({
   refresh,
   setRefresh,
 }: IConfirmationDeleteModal) => {
-  const { handleDeleteProduct, isLoading } = useDeleteProductHook(
-    refresh,
-    setRefresh,
-    setShow
+  const dispatch = useAppDispatch();
+  const { httpDeleteProductAsync } = useHttpDeleteProduct();
+
+  const handleDeleteProduct = () => {
+    dispatch(
+      httpDeleteProductAsync({
+        id: product._id,
+        refresh,
+        setRefresh,
+        setShow,
+        show,
+      })
+    );
+  };
+
+  const isLoadingDeleteProduct = useAppSelector(
+    (state) => state.loadingProduct.isLoadingDeleteProduct
   );
 
   return (
@@ -37,17 +50,14 @@ const ConfirmationDeleteModal = ({
           style={{ display: "flex", gap: "5px", justifyContent: "flex-end" }}
         >
           <Button onClick={() => setShow(false)}>Cancelar</Button>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <Button
-              type="primary"
-              danger
-              onClick={() => handleDeleteProduct(product._id)}
-            >
-              Eliminar
-            </Button>
-          )}
+          <Button
+            type="primary"
+            danger
+            loading={isLoadingDeleteProduct}
+            onClick={handleDeleteProduct}
+          >
+            Eliminar
+          </Button>
         </div>,
       ]}
     >

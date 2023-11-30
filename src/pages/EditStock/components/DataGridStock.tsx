@@ -2,19 +2,16 @@
 import { useState, useEffect } from "react";
 // Styles
 import {
-  InfoStyled,
   HeaderGridStyled,
   ContainerGridStyled,
-  ItemContainerStyled,
 } from "../../CreateSale/styles/DataGridStyled";
 import { ContainerSpinnerStyled } from "../styles/DataGridStyles";
 // Components
-import { Button } from "@mui/material";
+import { Pagination } from "antd";
+import ProductsList from "./ProductsList";
 import EditProductModal from "./EditProductModal";
-import { Delete, Edit } from "@mui/icons-material";
 import Spinner from "../../../components/Spinner/Spinner";
 import ConfirmationDeleteModal from "./ConfirmationDeleteModal";
-import { Pagination } from "antd";
 // Hooks
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 // Models
@@ -81,35 +78,11 @@ const DataGridStock = ({ refresh, setRefresh }: IDataGrid) => {
           <Spinner />
         </ContainerSpinnerStyled>
       ) : (
-        <div>
-          {products &&
-            products.map((product: Products) => (
-              <ItemContainerStyled key={product._id}>
-                <div>
-                  <b>{product.name}</b>
-                  <InfoStyled>Stock: {product.stock}</InfoStyled>
-                  <InfoStyled>${product.price.toFixed(2)}</InfoStyled>
-                </div>
-                <div>
-                  <Button
-                    variant="outlined"
-                    onClick={() => editProduct(product)}
-                  >
-                    <Edit />
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => deleteProduct(product)}
-                  >
-                    <Delete />
-                  </Button>
-                </div>
-              </ItemContainerStyled>
-            ))}
-        </div>
+        <ProductsList
+          products={products}
+          editProduct={editProduct}
+          deleteProduct={deleteProduct}
+        />
       )}
       {/* Paginacion */}
       <div style={{ display: "flex", justifyContent: "center" }}>
