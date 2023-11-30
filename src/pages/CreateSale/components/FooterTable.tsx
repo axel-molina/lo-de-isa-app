@@ -23,7 +23,7 @@ const FooterTable = ({ precioFinal }: IPrice) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { editAsyncProduct } = useHttpEditProduct();
+  const { httpEditProductAsync } = useHttpEditProduct();
 
   const ListaOrdenDeVenta = useAppSelector(
     (state) => state.productosEnOrdenDeVenta
@@ -70,10 +70,10 @@ const FooterTable = ({ precioFinal }: IPrice) => {
           stock: newStock,
           price: item.price,
           code: item.code,
-          user: item.userId,
         };
         // editar producto en la base de datos
-        editAsyncProduct(item._id, newProduct);
+        dispatch(httpEditProductAsync({ id: item._id, body: newProduct }));
+        console.log("corregir editar producto", newProduct);
       }
     });
   };

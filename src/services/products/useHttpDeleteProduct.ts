@@ -9,15 +9,8 @@ import { resetUser } from "../../features/userData/userDataSlice";
 import { useNavigate } from "react-router-dom";
 import { PageRoutes } from "../../routes";
 
-interface Body {
-  name: string;
-  stock: number;
-  price: number;
-  code: string;
-}
 interface IEditProduct {
   id: string;
-  body: Body;
   setShow: (value: boolean) => void;
   show: boolean;
   refresh: boolean;
@@ -29,13 +22,7 @@ const useHttpDeleteProduct = () => {
   const token = localStorage.getItem("token") || getToken();
   const tokenWithoutQuotes = token?.replace(/['"]+/g, "");
   const httpDeleteProductAsync =
-    ({
-      id,
-      setShow,
-      show,
-      refresh,
-      setRefresh,
-    }: IEditProduct): AppThunk =>
+    ({ id, setShow, show, refresh, setRefresh }: IEditProduct): AppThunk =>
     async (dispatch) => {
       dispatch(setIsLoadingDeleteProduct(true));
       try {

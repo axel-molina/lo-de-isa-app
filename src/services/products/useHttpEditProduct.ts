@@ -18,10 +18,10 @@ interface Body {
 interface IEditProduct {
   id: string;
   body: Body;
-  setShow: (value: boolean) => void;
-  show: boolean;
-  refresh: boolean;
-  setRefresh: (value: boolean) => void;
+  setShow?: (value: boolean) => void;
+  show?: boolean;
+  refresh?: boolean;
+  setRefresh?: (value: boolean) => void;
 }
 
 const useHttpEditProduct = () => {
@@ -60,8 +60,8 @@ const useHttpEditProduct = () => {
         }
 
         if (response.ok) {
-          setRefresh(!refresh);
-          setShow(!show);
+          setRefresh && refresh && setRefresh(!refresh);
+          setShow && show && setShow(!show);
           message.success("Producto editado exitosamente");
           dispatch(setIsLoadingEditProduct(false));
         } else {

@@ -1,4 +1,4 @@
-import React, { KeyboardEventHandler } from "react";
+import React from "react";
 import { Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 // Componenets
@@ -14,7 +14,7 @@ import { Button, Row, Col, Input } from "antd";
 interface IModal {
   show: boolean;
   setShow: (show: boolean) => void;
-  handleSearchProduct: KeyboardEventHandler<HTMLInputElement>;
+  handleSearchProduct: () => void;
   setSearch: (search: string) => void;
   search: string;
 }
@@ -56,7 +56,9 @@ const ModalAñadirProd = ({
             />
           </Col>
           <Col span={2}>
-            <Button type="primary" onClick={handleSearchProduct}>Buscar</Button>
+            <Button type="primary" onClick={handleSearchProduct}>
+              Buscar
+            </Button>
           </Col>
           <Col span={24}>
             <DataGridModal />
