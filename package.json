@@ -62,6 +62,7 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.44.0",
     "eslint-config-manzdev": "^0.0.2",
