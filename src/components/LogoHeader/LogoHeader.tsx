@@ -10,7 +10,7 @@ const LogoHeader = () => (
     }}
   >
     <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-      <img src={Logo} alt="Logo" style={{ width: "2rem" }} />
+      <img src={Logo} alt="Logo" style={{ width: "2rem" }} loading="lazy" />
       <h1
         style={{
           color: "#1b7d98",
