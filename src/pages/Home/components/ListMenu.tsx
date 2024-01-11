@@ -38,7 +38,7 @@ const ListMenu = () => {
         <ListItemText primary="Editar stock" />
       </ListItemButton>
       <Divider />
-      <ListItemButton>
+      <ListItemButton onClick={() => handleClick(PageRoutes.historial)}>
         <ListItemIcon>
           <History />
         </ListItemIcon>

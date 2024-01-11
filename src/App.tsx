@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 const Home = lazy(() => import("./pages/Home"));
 const Register = lazy(() => import("./pages/Register"));
 const CrearVenta = lazy(() => import("./pages/CreateSale"));
+const History = lazy(() => import("./pages/History"));
 const IniciarSesion = lazy(() => import("./pages/SignIn"));
 const EditarStock = lazy(() => import("./pages/EditStock"));
 const AddProductForm = lazy(() => import("./pages/AddProductForm"));
@@ -48,6 +49,14 @@ function App() {
             element={
               <RequireAuth>
                 <CrearVenta />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path={PageRoutes.historial}
+            element={
+              <RequireAuth>
+                <History />
               </RequireAuth>
             }
           />
